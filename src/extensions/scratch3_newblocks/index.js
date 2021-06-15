@@ -16,13 +16,40 @@ class Scratch3NewBlocks {
                 {
                     opcode: 'writeLog',
                     blockType: BlockType.COMMAND,
-                    text: 'log [TEXT]',
+                    text: 'テキストログ [TEXT]',
                     arguments: {
                         TEXT: {
                             type: ArgumentType.STRING,
-                            defaultValue: "hello"
+                            defaultValue: "こんにちは"
                         }
                     }
+                },
+                {
+                    opcode: 'reporter1',
+                    blockType: BlockType.REPORTER,
+                    text: 'reporter [TEXT]',
+                    arguments: {
+                        TEXT: {
+                            type: ArgumentType.STRING,
+                            defaultValue: "こんにちは"
+                        }
+                    }
+                },
+                {
+                    opcode: 'boolean1',
+                    blockType: BlockType.BOOLEAN,
+                    text: 'boolean [TEXT]',
+                    arguments: {
+                        TEXT: {
+                            type: ArgumentType.STRING,
+                            defaultValue: "こんにちは"
+                        }
+                    }
+                },
+                {
+                    opcode: 'hat1',
+                    blockType: BlockType.HAT,
+                    text: 'hat',
                 }
             ],
             menus: {
@@ -33,6 +60,23 @@ class Scratch3NewBlocks {
     writeLog (args) {
         const text = Cast.toString(args.TEXT);
         log.log(text);
+    }
+    reporter1 (args) {
+        const text = Cast.toString(args.TEXT);
+        log.log(text);
+        return 'Argument TEXT is \{args.TEXT}';
+    }
+    boolean1(args) {
+        return args.TEXT == "hello";
+    }
+    send(args) {
+        this.changed = true;
+    }
+    hat1(args) {
+        var rtn = this.changed && (!this.lasthat);
+        this.changed = false;
+        this.lasthat = rtn;
+        return rtn;
     }
 }
 
