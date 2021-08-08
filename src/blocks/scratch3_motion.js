@@ -67,12 +67,14 @@ class Scratch3MotionBlocks {
         const dx = steps * Math.cos(radians);
         const dy = steps * Math.sin(radians);
         util.target.setXY(util.target.x + dx, util.target.y + dy);
+        console.count(steps+'歩動かす');
     }
 
     goToXY (args, util) {
         const x = Cast.toNumber(args.X);
         const y = Cast.toNumber(args.Y);
         util.target.setXY(x, y);
+        console.count('x座標を'+x+'y座標を'+y+'にする');
     }
 
     getTargetXY (targetName, util) {
@@ -98,6 +100,7 @@ class Scratch3MotionBlocks {
 
     goTo (args, util) {
         const targetXY = this.getTargetXY(args.TO, util);
+        console.count(targetXY+'へ行く');
         if (targetXY) {
             util.target.setXY(targetXY[0], targetXY[1]);
         }
@@ -106,16 +109,19 @@ class Scratch3MotionBlocks {
     turnRight (args, util) {
         const degrees = Cast.toNumber(args.DEGREES);
         util.target.setDirection(util.target.direction + degrees);
+        console.count('右に'+degrees+'曲がる');
     }
 
     turnLeft (args, util) {
         const degrees = Cast.toNumber(args.DEGREES);
         util.target.setDirection(util.target.direction - degrees);
+        console.count('左に'+degrees+'曲がる');
     }
 
     pointInDirection (args, util) {
         const direction = Cast.toNumber(args.DIRECTION);
         util.target.setDirection(direction);
+        console.count(direction+'度に向ける');
     }
 
     pointTowards (args, util) {
@@ -133,6 +139,13 @@ class Scratch3MotionBlocks {
             if (!pointTarget) return;
             targetX = pointTarget.x;
             targetY = pointTarget.y;
+        }
+        if (args.TOWARDS === '_mouse_') {
+            console.count('マウスのポインターへ向ける');
+        } else if (args.TOWARDS === '_random_') {
+            console.count('どこかの場所へ向ける');
+        } else {
+            console.count(args.TOWARDS+'へ向ける');
         }
 
         const dx = targetX - util.target.x;
@@ -157,6 +170,7 @@ class Scratch3MotionBlocks {
             } else {
                 // Finished: move to final position.
                 util.target.setXY(util.stackFrame.endX, util.stackFrame.endY);
+                console.count(util.stackFrame.duration+'秒でx座標を'+util.stackFrame.endX+'y座標を'+util.stackFrame.endY+'に変える');
             }
         } else {
             // First time: save data for future use.
@@ -237,41 +251,50 @@ class Scratch3MotionBlocks {
         // Keep within the stage.
         const fencedPosition = util.target.keepInFence(util.target.x, util.target.y);
         util.target.setXY(fencedPosition[0], fencedPosition[1]);
+        console.count('もし端に着いたら跳ね返る');
     }
 
     setRotationStyle (args, util) {
         util.target.setRotationStyle(args.STYLE);
+        console.count('回転方法を'+args.STYLE+'にする');
     }
 
     changeX (args, util) {
         const dx = Cast.toNumber(args.DX);
         util.target.setXY(util.target.x + dx, util.target.y);
+        console.count('x座標を'+dx+'ずつ変える');
     }
 
     setX (args, util) {
         const x = Cast.toNumber(args.X);
         util.target.setXY(x, util.target.y);
+        console.count('xを'+x+'にする');
     }
 
     changeY (args, util) {
         const dy = Cast.toNumber(args.DY);
         util.target.setXY(util.target.x, util.target.y + dy);
+        console.count('y座標を'+dy+'ずつ変える');
     }
 
     setY (args, util) {
         const y = Cast.toNumber(args.Y);
         util.target.setXY(util.target.x, y);
+        console.count('yを'+y+'にする');
     }
 
     getX (args, util) {
+        console.count('x座標');
         return this.limitPrecision(util.target.x);
     }
 
     getY (args, util) {
+        console.count('y座標');
         return this.limitPrecision(util.target.y);
     }
 
     getDirection (args, util) {
+        console.count('向き');
         return util.target.direction;
     }
 
