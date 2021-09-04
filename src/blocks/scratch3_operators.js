@@ -38,42 +38,52 @@ class Scratch3OperatorsBlocks {
     }
 
     add (args) {
+        console.log(Cast.toNumber(args.NUM1) +"+"+ Cast.toNumber(args.NUM2));
         return Cast.toNumber(args.NUM1) + Cast.toNumber(args.NUM2);
     }
 
     subtract (args) {
+        console.log(Cast.toNumber(args.NUM1) +"-"+ Cast.toNumber(args.NUM2));
         return Cast.toNumber(args.NUM1) - Cast.toNumber(args.NUM2);
     }
 
     multiply (args) {
+        console.log(Cast.toNumber(args.NUM1) +"*"+ Cast.toNumber(args.NUM2));
         return Cast.toNumber(args.NUM1) * Cast.toNumber(args.NUM2);
     }
 
     divide (args) {
+        console.log(Cast.toNumber(args.NUM1) +"/"+ Cast.toNumber(args.NUM2));
         return Cast.toNumber(args.NUM1) / Cast.toNumber(args.NUM2);
     }
 
     lt (args) {
+        console.log(args.OPERAND1+"<"+args.OPERAND2);
         return Cast.compare(args.OPERAND1, args.OPERAND2) < 0;
     }
 
     equals (args) {
+        console.log(args.OPERAND1+"="+args.OPERAND2);
         return Cast.compare(args.OPERAND1, args.OPERAND2) === 0;
     }
 
     gt (args) {
+        console.log(args.OPERAND1+">"+args.OPERAND2);
         return Cast.compare(args.OPERAND1, args.OPERAND2) > 0;
     }
 
     and (args) {
+        console.log(args.OPERAND1+"かつ"+args.OPERAND2);
         return Cast.toBoolean(args.OPERAND1) && Cast.toBoolean(args.OPERAND2);
     }
 
     or (args) {
+        console.log(args.OPERAND1+"または"+args.OPERAND2);
         return Cast.toBoolean(args.OPERAND1) || Cast.toBoolean(args.OPERAND2);
     }
 
     not (args) {
+        console.log(args.OPERAND+"ではない");
         return !Cast.toBoolean(args.OPERAND);
     }
 
@@ -83,6 +93,7 @@ class Scratch3OperatorsBlocks {
         const low = nFrom <= nTo ? nFrom : nTo;
         const high = nFrom <= nTo ? nTo : nFrom;
         if (low === high) return low;
+        console.log(args.FROM+"から"+args.TO+"までの乱数");
         // If both arguments are ints, truncate the result to an int.
         if (Cast.isInt(args.FROM) && Cast.isInt(args.TO)) {
             return low + Math.floor(Math.random() * ((high + 1) - low));
@@ -91,10 +102,12 @@ class Scratch3OperatorsBlocks {
     }
 
     join (args) {
+        console.log(args.STRING1+"と"+args.STRING2);
         return Cast.toString(args.STRING1) + Cast.toString(args.STRING2);
     }
 
     letterOf (args) {
+        console.log(args.STRING+"の"+args.LETTER+"番目の文字");
         const index = Cast.toNumber(args.LETTER) - 1;
         const str = Cast.toString(args.STRING);
         // Out of bounds?
@@ -105,10 +118,12 @@ class Scratch3OperatorsBlocks {
     }
 
     length (args) {
+        console.log(args.STRING+"の長さ");
         return Cast.toString(args.STRING).length;
     }
 
     contains (args) {
+        console.log(args.STRING1+"に"+args.STRING+"が含まれる");
         const format = function (string) {
             return Cast.toString(string).toLowerCase();
         };
@@ -116,6 +131,7 @@ class Scratch3OperatorsBlocks {
     }
 
     mod (args) {
+        console.log(args.NUM1+"を"+arguments.NUM2+"で割った余り");
         const n = Cast.toNumber(args.NUM1);
         const modulus = Cast.toNumber(args.NUM2);
         let result = n % modulus;
@@ -125,6 +141,7 @@ class Scratch3OperatorsBlocks {
     }
 
     round (args) {
+        console.log(args.NUM+"を四捨五入");
         return Math.round(Cast.toNumber(args.NUM));
     }
 
@@ -147,6 +164,7 @@ class Scratch3OperatorsBlocks {
         case 'e ^': return Math.exp(n);
         case '10 ^': return Math.pow(10, n);
         }
+        console.log(args.NUM+"の"+args.OPERATOR);
         return 0;
     }
 }
