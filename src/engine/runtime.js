@@ -174,18 +174,26 @@ let rendererDrawProfilerId = -1;
  * Manages targets, scripts, and the sequencer.
  * @constructor
  */
+
+/**DB tool */
+var dbname = "scratch3.0 db";
+var dbversion = "1.0";
+var dbdescription = "scratch3.0のDatabase"
+var dbsize = 1000;
 class Runtime extends EventEmitter {
     constructor () {
         super();
 
         /**
          * Target management and storage.
+         * ターゲットの管理と保管
          * @type {Array.<!Target>}
          */
         this.targets = [];
 
         /**
          * Targets in reverse order of execution. Shares its order with drawables.
+         * 目標は実行の逆に注文します。その命令を描画可能部分と共有します。
          * @type {Array.<!Target>}
          */
         this.executableTargets = [];
@@ -193,6 +201,8 @@ class Runtime extends EventEmitter {
         /**
          * A list of threads that are currently running in the VM.
          * Threads are added when execution starts and pruned when execution ends.
+         * 現在VMで実行されているスレッドのリスト。
+         * スレッドは実行に追加され、終了時に除去される
          * @type {Array.<Thread>}
          */
         this.threads = [];
@@ -438,6 +448,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get BLOCK_GLOW_ON () {
+        console.log("ブロック光った");
         return 'BLOCK_GLOW_ON';
     }
 
@@ -446,6 +457,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get BLOCK_GLOW_OFF () {
+        console.log("ブロック光らなくなった");
         return 'BLOCK_GLOW_OFF';
     }
 
@@ -463,6 +475,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get TURBO_MODE_ON () {
+        console.log("ターボモードオン");
         return 'TURBO_MODE_ON';
     }
 
@@ -471,6 +484,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get TURBO_MODE_OFF () {
+        console.log("ターボモードオフ");
         return 'TURBO_MODE_OFF';
     }
 
@@ -480,6 +494,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_START () {
+        console.log("プロジェクトスタート");
         return 'PROJECT_START';
     }
 
@@ -489,6 +504,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_RUN_START () {
+        console.log("プロジェクトランスタート");
         return 'PROJECT_RUN_START';
     }
 
@@ -498,6 +514,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_RUN_STOP () {
+        console.log("プロジェクトラン停止");
         return 'PROJECT_RUN_STOP';
     }
 
@@ -507,6 +524,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_STOP_ALL () {
+        console.log("全てのプロジェクトの停止");
         return 'PROJECT_STOP_ALL';
     }
 
@@ -516,6 +534,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get STOP_FOR_TARGET () {
+        console.log("ターゲットのために停止");
         return 'STOP_FOR_TARGET';
     }
 
@@ -524,6 +543,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get VISUAL_REPORT () {
+        console.log("見た目報告");
         return 'VISUAL_REPORT';
     }
 
@@ -532,6 +552,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_LOADED () {
+        console.log("プロジェクトの読み込み");
         return 'PROJECT_LOADED';
     }
 
@@ -540,6 +561,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_CHANGED () {
+        console.log("プロジェクトの変更");
         return 'PROJECT_CHANGED';
     }
 
@@ -564,6 +586,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get MONITORS_UPDATE () {
+        console.log("モニターの更新");
         return 'MONITORS_UPDATE';
     }
 
@@ -580,6 +603,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get BLOCK_DRAG_END () {
+        console.log("ブロックドラッグの終了");
         return 'BLOCK_DRAG_END';
     }
 
@@ -588,6 +612,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get EXTENSION_ADDED () {
+        console.log("拡張機能が追加されました");
         return 'EXTENSION_ADDED';
     }
 
@@ -596,6 +621,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get EXTENSION_FIELD_ADDED () {
+        console.log("拡張フィールドが追加されました");
         return 'EXTENSION_FIELD_ADDED';
     }
 
@@ -606,6 +632,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PERIPHERAL_LIST_UPDATE () {
+        console.log("周辺機器リストの更新");
         return 'PERIPHERAL_LIST_UPDATE';
     }
     
@@ -615,6 +642,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get USER_PICKED_PERIPHERAL () {
+        console.log("ユーザーが選んだ周辺機器");
         return 'USER_PICKED_PERIPHERAL';
     }
 
@@ -624,6 +652,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PERIPHERAL_CONNECTED () {
+        console.log("周辺機器が接続されています");
         return 'PERIPHERAL_CONNECTED';
     }
 
@@ -633,6 +662,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PERIPHERAL_DISCONNECTED () {
+        console.log("周辺機器が切断されました");
         return 'PERIPHERAL_DISCONNECTED';
     }
 
@@ -642,6 +672,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PERIPHERAL_REQUEST_ERROR () {
+        console.log("周辺機器からのリクエストエラー");
         return 'PERIPHERAL_REQUEST_ERROR';
     }
 
@@ -660,6 +691,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PERIPHERAL_SCAN_TIMEOUT () {
+        console.log("周辺機器の読み込みタイムアウト");
         return 'PERIPHERAL_SCAN_TIMEOUT';
     }
 
@@ -668,6 +700,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get MIC_LISTENING () {
+        console.log("マイク聞く");
         return 'MIC_LISTENING';
     }
 
@@ -692,6 +725,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get RUNTIME_DISPOSED () {
+        console.log("実行の廃棄");
         return 'RUNTIME_DISPOSED';
     }
 
@@ -730,6 +764,7 @@ class Runtime extends EventEmitter {
 
     // Helper function for initializing the addCloudVariable function
     _initializeAddCloudVariable (newCloudDataManager) {
+        console.log("addCloudVariable関数を初期化するためのヘルパー関数");
         // The addCloudVariable function
         return (() => {
             const hadCloudVarsBefore = this.hasCloudData();
@@ -742,6 +777,7 @@ class Runtime extends EventEmitter {
 
     // Helper function for initializing the removeCloudVariable function
     _initializeRemoveCloudVariable (newCloudDataManager) {
+        console.log("removeCloudVariable関数を初期化するためのヘルパー関数");
         return (() => {
             const hadCloudVarsBefore = this.hasCloudData();
             newCloudDataManager.removeCloudVariable();
@@ -757,6 +793,7 @@ class Runtime extends EventEmitter {
      * @private
      */
     _registerBlockPackages () {
+        console.log("このランタイムにデフォルトのブロックパッケージを登録します。");
         for (const packageName in defaultBlockPackages) {
             if (defaultBlockPackages.hasOwnProperty(packageName)) {
                 // @todo pass a different runtime depending on package privilege?
@@ -1793,7 +1830,7 @@ class Runtime extends EventEmitter {
                 blockId: topBlockId,
                 fieldsOfInputs: hatFields
             } = script;
-
+console.log(topBlockId);
             // Match any requested fields.
             // For example: ensures that broadcasts match.
             // This needs to happen before the block is evaluated
@@ -1991,6 +2028,14 @@ class Runtime extends EventEmitter {
         for (let i = 0; i < this.targets.length; i++) {
             this.targets[i].onGreenFlag();
         }
+        console.log("種類：イベント");
+        console.log("緑の旗が押されたとき");
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ? )", ['events','GreenFlagの開始'],
+          );
+      }
+          )
         this.startHats('event_whenflagclicked');
     }
 
