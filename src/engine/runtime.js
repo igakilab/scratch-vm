@@ -448,7 +448,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get BLOCK_GLOW_ON () {
-        console.log("ブロック光った");
+        //console.log("ブロック光った");
         return 'BLOCK_GLOW_ON';
     }
 
@@ -457,7 +457,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get BLOCK_GLOW_OFF () {
-        console.log("ブロック光らなくなった");
+        //console.log("ブロック光らなくなった");
         return 'BLOCK_GLOW_OFF';
     }
 
@@ -475,7 +475,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get TURBO_MODE_ON () {
-        console.log("ターボモードオン");
+        //console.log("ターボモードオン");
         return 'TURBO_MODE_ON';
     }
 
@@ -484,7 +484,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get TURBO_MODE_OFF () {
-        console.log("ターボモードオフ");
+        //console.log("ターボモードオフ");
         return 'TURBO_MODE_OFF';
     }
 
@@ -494,7 +494,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_START () {
-        console.log("プロジェクトスタート");
+        //console.log("プロジェクトスタート");
         return 'PROJECT_START';
     }
 
@@ -504,7 +504,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_RUN_START () {
-        console.log("プロジェクトランスタート");
+        //console.log("プロジェクトランスタート");
         return 'PROJECT_RUN_START';
     }
 
@@ -514,7 +514,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_RUN_STOP () {
-        console.log("プロジェクトラン停止");
+        //console.log("プロジェクトラン停止");
         return 'PROJECT_RUN_STOP';
     }
 
@@ -524,7 +524,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_STOP_ALL () {
-        console.log("全てのプロジェクトの停止");
+        //console.log("全てのプロジェクトの停止");
         return 'PROJECT_STOP_ALL';
     }
 
@@ -534,7 +534,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get STOP_FOR_TARGET () {
-        console.log("ターゲットのために停止");
+        //console.log("ターゲットのために停止");
         return 'STOP_FOR_TARGET';
     }
 
@@ -543,7 +543,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get VISUAL_REPORT () {
-        console.log("見た目報告");
+        //console.log("見た目報告");
         return 'VISUAL_REPORT';
     }
 
@@ -552,7 +552,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_LOADED () {
-        console.log("プロジェクトの読み込み");
+        //console.log("プロジェクトの読み込み");
         return 'PROJECT_LOADED';
     }
 
@@ -561,7 +561,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PROJECT_CHANGED () {
-        console.log("プロジェクトの変更");
+        //console.log("プロジェクトの変更");
         return 'PROJECT_CHANGED';
     }
 
@@ -586,7 +586,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get MONITORS_UPDATE () {
-        console.log("モニターの更新");
+        //console.log("モニターの更新");
         return 'MONITORS_UPDATE';
     }
 
@@ -603,7 +603,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get BLOCK_DRAG_END () {
-        console.log("ブロックドラッグの終了");
+        //console.log("ブロックドラッグの終了");
         return 'BLOCK_DRAG_END';
     }
 
@@ -612,7 +612,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get EXTENSION_ADDED () {
-        console.log("拡張機能が追加されました");
+        //console.log("拡張機能が追加されました");
         return 'EXTENSION_ADDED';
     }
 
@@ -621,7 +621,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get EXTENSION_FIELD_ADDED () {
-        console.log("拡張フィールドが追加されました");
+        //console.log("拡張フィールドが追加されました");
         return 'EXTENSION_FIELD_ADDED';
     }
 
@@ -632,17 +632,17 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PERIPHERAL_LIST_UPDATE () {
-        console.log("周辺機器リストの更新");
+        //console.log("周辺機器リストの更新");
         return 'PERIPHERAL_LIST_UPDATE';
     }
-    
+
     /**
      * Event name for when the user picks a bluetooth device to connect to
      * via Companion Device Manager (CDM)
      * @const {string}
      */
     static get USER_PICKED_PERIPHERAL () {
-        console.log("ユーザーが選んだ周辺機器");
+        //console.log("ユーザーが選んだ周辺機器");
         return 'USER_PICKED_PERIPHERAL';
     }
 
@@ -652,7 +652,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PERIPHERAL_CONNECTED () {
-        console.log("周辺機器が接続されています");
+        //console.log("周辺機器が接続されています");
         return 'PERIPHERAL_CONNECTED';
     }
 
@@ -662,7 +662,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PERIPHERAL_DISCONNECTED () {
-        console.log("周辺機器が切断されました");
+        //console.log("周辺機器が切断されました");
         return 'PERIPHERAL_DISCONNECTED';
     }
 
@@ -672,7 +672,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PERIPHERAL_REQUEST_ERROR () {
-        console.log("周辺機器からのリクエストエラー");
+        //console.log("周辺機器からのリクエストエラー");
         return 'PERIPHERAL_REQUEST_ERROR';
     }
 
@@ -691,7 +691,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get PERIPHERAL_SCAN_TIMEOUT () {
-        console.log("周辺機器の読み込みタイムアウト");
+        //console.log("周辺機器の読み込みタイムアウト");
         return 'PERIPHERAL_SCAN_TIMEOUT';
     }
 
@@ -700,7 +700,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get MIC_LISTENING () {
-        console.log("マイク聞く");
+        //console.log("マイク聞く");
         return 'MIC_LISTENING';
     }
 
@@ -725,7 +725,7 @@ class Runtime extends EventEmitter {
      * @const {string}
      */
     static get RUNTIME_DISPOSED () {
-        console.log("実行の廃棄");
+       // console.log("実行の廃棄");
         return 'RUNTIME_DISPOSED';
     }
 
@@ -764,7 +764,7 @@ class Runtime extends EventEmitter {
 
     // Helper function for initializing the addCloudVariable function
     _initializeAddCloudVariable (newCloudDataManager) {
-        console.log("addCloudVariable関数を初期化するためのヘルパー関数");
+        //console.log("addCloudVariable関数を初期化するためのヘルパー関数");
         // The addCloudVariable function
         return (() => {
             const hadCloudVarsBefore = this.hasCloudData();
@@ -777,7 +777,7 @@ class Runtime extends EventEmitter {
 
     // Helper function for initializing the removeCloudVariable function
     _initializeRemoveCloudVariable (newCloudDataManager) {
-        console.log("removeCloudVariable関数を初期化するためのヘルパー関数");
+        //console.log("removeCloudVariable関数を初期化するためのヘルパー関数");
         return (() => {
             const hadCloudVarsBefore = this.hasCloudData();
             newCloudDataManager.removeCloudVariable();
@@ -793,7 +793,7 @@ class Runtime extends EventEmitter {
      * @private
      */
     _registerBlockPackages () {
-        console.log("このランタイムにデフォルトのブロックパッケージを登録します。");
+        //console.log("このランタイムにデフォルトのブロックパッケージを登録します。");
         for (const packageName in defaultBlockPackages) {
             if (defaultBlockPackages.hasOwnProperty(packageName)) {
                 // @todo pass a different runtime depending on package privilege?

@@ -20,6 +20,7 @@ class Cast {
      * @return {number} The Scratch-casted number value.
      */
     static toNumber (value) {
+        //console.log("数字のあるブロック");
         // If value is already a number we don't need to coerce it with
         // Number().
         if (typeof value === 'number') {
@@ -47,6 +48,7 @@ class Cast {
      * @return {boolean} The Scratch-casted boolean value.
      */
     static toBoolean (value) {
+        //console.log("条件系ブロック");
         // Already a boolean?
         if (typeof value === 'boolean') {
             return value;
@@ -71,6 +73,7 @@ class Cast {
      * @return {string} The Scratch-casted string value.
      */
     static toString (value) {
+        //console.log("キー押されブロック");
         return String(value);
     }
 
@@ -90,6 +93,7 @@ class Cast {
      * @return {RGBOject} [r,g,b], values between 0-255.
      */
     static toRgbColorObject (value) {
+        //console.log("色ブロック");
         let color;
         if (typeof value === 'string' && value.substring(0, 1) === '#') {
             color = Color.hexToRgb(value);
@@ -119,6 +123,7 @@ class Cast {
      * @returns {number} Negative number if v1 < v2; 0 if equal; positive otherwise.
      */
     static compare (v1, v2) {
+        //console.log("記号系ブロック");
         let n1 = Number(v1);
         let n2 = Number(v2);
         if (n1 === 0 && Cast.isWhiteSpace(v1)) {
