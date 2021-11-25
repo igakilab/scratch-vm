@@ -2,6 +2,11 @@ const Cast = require('../util/cast');
 const MathUtil = require('../util/math-util');
 const Timer = require('../util/timer');
 
+/**DB tool */
+var dbname = "scratch3.0 db";
+var dbversion = "1.0";
+var dbdescription = "scratch3.0のDatabase"
+var dbsize = 1000;
 class Scratch3MotionBlocks {
     constructor (runtime) {
         /**
@@ -67,16 +72,26 @@ class Scratch3MotionBlocks {
         const dx = steps * Math.cos(radians);
         const dy = steps * Math.sin(radians);
         util.target.setXY(util.target.x + dx, util.target.y + dy);
-        console.count('種類：動き');
-        console.count(steps+'歩動かす');
+        console.log('種類：動き：'+steps+'歩動かす');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion',steps+'歩動かす'],
+          );
+      }
+          )
     }
 
     goToXY (args, util) {
         const x = Cast.toNumber(args.X);
         const y = Cast.toNumber(args.Y);
         util.target.setXY(x, y);
-        console.count('種類：動き');
-        console.count('x座標を'+x+'y座標を'+y+'にする');
+        console.log('種類：動き：x座標を'+x+'y座標を'+y+'にする');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ?)", ['hat_block','motion','x座標を'+x+'y座標を'+y+'にする'],
+          );
+      }
+          )
     }
 
     getTargetXY (targetName, util) {
@@ -102,8 +117,13 @@ class Scratch3MotionBlocks {
 
     goTo (args, util) {
         const targetXY = this.getTargetXY(args.TO, util);
-        console.count('種類：動き');
-        console.count(targetXY+'へ行く');
+        console.log.log('種類：動き：'+targetXY+'へ行く');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion',targetXY+'へ行く'],
+          );
+      }
+          )
         if (targetXY) {
             util.target.setXY(targetXY[0], targetXY[1]);
         }
@@ -112,22 +132,37 @@ class Scratch3MotionBlocks {
     turnRight (args, util) {
         const degrees = Cast.toNumber(args.DEGREES);
         util.target.setDirection(util.target.direction + degrees);
-        console.count('種類：動き');
-        console.count('右に'+degrees+'曲がる');
+        console.log('種類：動き：右に'+degrees+'曲がる');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion','右に'+degrees+'度回す'],
+          );
+      }
+          )
     }
 
     turnLeft (args, util) {
         const degrees = Cast.toNumber(args.DEGREES);
         util.target.setDirection(util.target.direction - degrees);
-        console.count('種類：動き');
-        console.count('左に'+degrees+'曲がる');
+        console.log('種類：動き：左に'+degrees+'曲がる');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion','左に'+degrees+'度回す'],
+          );
+      }
+          )
     }
 
     pointInDirection (args, util) {
         const direction = Cast.toNumber(args.DIRECTION);
         util.target.setDirection(direction);
-        console.count('種類：動き');
-        console.count(direction+'度に向ける');
+        console.log('種類：動き：'+direction+'度に向ける');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion',direction+'度に向ける'],
+          );
+      }
+          )
     }
 
     pointTowards (args, util) {
@@ -147,14 +182,29 @@ class Scratch3MotionBlocks {
             targetY = pointTarget.y;
         }
         if (args.TOWARDS === '_mouse_') {
-            console.count('種類：動き');
-            console.count('マウスのポインターへ向ける');
+            console.log('種類：動き:マウスのポインターへ向ける');
+            var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion','マウスのポインターへ向ける'],
+          );
+      }
+          )
         } else if (args.TOWARDS === '_random_') {
-            console.count('種類：動き');
-            console.count('どこかの場所へ向ける');
+            console.log('種類：動き:どこかの場所へ向ける');
+            var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion','どこかの場所へ向ける'],
+          );
+      }
+          )
         } else {
-            console.count('種類：動き');
-            console.count(args.TOWARDS+'へ向ける');
+            console.log('種類：動き:'+args.TOWARDS+'へ向ける');
+            var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion',args.TOWARDS+'へ向ける'],
+          );
+      }
+          )
         }
 
         const dx = targetX - util.target.x;
@@ -179,8 +229,16 @@ class Scratch3MotionBlocks {
             } else {
                 // Finished: move to final position.
                 util.target.setXY(util.stackFrame.endX, util.stackFrame.endY);
-                console.count('種類：動き');
-                console.count(util.stackFrame.duration+'秒でx座標を'+util.stackFrame.endX+'y座標を'+util.stackFrame.endY+'に変える');
+                var move_time =util.stackFrame.duration;
+                var x_place =util.stackFrame.endX;
+                var y_place =util.stackFrame.endY;
+                console.log('種類：動き:'+util.stackFrame.duration+'秒でx座標を'+util.stackFrame.endX+'y座標を'+util.stackFrame.endY+'に変える');
+                var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion',move_time+'秒でx座標を'+x_place+'に、y座標を'+y_place+'に変える'],
+          );
+      }
+          )
             }
         } else {
             // First time: save data for future use.
@@ -261,59 +319,104 @@ class Scratch3MotionBlocks {
         // Keep within the stage.
         const fencedPosition = util.target.keepInFence(util.target.x, util.target.y);
         util.target.setXY(fencedPosition[0], fencedPosition[1]);
-        console.count('種類：動き');
-        console.count('もし端に着いたら跳ね返る');
+        console.log('種類：動き:もし端に着いたら跳ね返る');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion','もし端に着いたら跳ね返る'],
+          );
+      }
+          )
     }
 
     setRotationStyle (args, util) {
         util.target.setRotationStyle(args.STYLE);
-        console.count('種類：動き');
-        console.count('回転方法を'+args.STYLE+'にする');
+        console.count('種類：動き:回転方法を'+args.STYLE+'にする');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion','回転方法を'+args.STYLE+'にする'],
+          );
+      }
+          )
     }
 
     changeX (args, util) {
         const dx = Cast.toNumber(args.DX);
         util.target.setXY(util.target.x + dx, util.target.y);
-        console.count('種類：動き');
-        console.count('x座標を'+dx+'ずつ変える');
+        console.count('種類：動き:x座標を'+dx+'ずつ変える');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion','x座標を'+dx+'ずつ変える'],
+          );
+      }
+          )
     }
 
     setX (args, util) {
         const x = Cast.toNumber(args.X);
         util.target.setXY(x, util.target.y);
-        console.count('種類：動き');
-        console.count('x座標を'+x+'にする');
+        console.log('種類：動き:x座標を'+x+'にする');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion','x座標を'+x+'にする'],
+          );
+      }
+          )
     }
 
     changeY (args, util) {
         const dy = Cast.toNumber(args.DY);
         util.target.setXY(util.target.x, util.target.y + dy);
-        console.count('種類：動き');
-        console.count('y座標を'+dy+'ずつ変える');
+        console.log('種類：動き:y座標を'+dy+'ずつ変える');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion','y座標を'+dy+'ずつ変える'],
+          );
+      }
+          )
     }
 
     setY (args, util) {
         const y = Cast.toNumber(args.Y);
         util.target.setXY(util.target.x, y);
-        console.count('種類：動き');
-        console.count('y座標を'+y+'にする');
+        console.log('種類：動き:x座標を'+y+'にする');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['hat_block','motion','y座標を'+y+'にする'],
+          );
+      }
+          )
     }
 
     getX (args, util) {
-        console.count('種類：動き');
-        console.count('x座標');
+        console.log('種類：動き:x座標');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['value_block','motion','x座標'],
+          );
+      }
+          )
         return this.limitPrecision(util.target.x);
     }
 
     getY (args, util) {
-        console.count('種類：動き');
-        console.count('y座標');
+        console.log('種類：動き:y座標');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['value','motion','y座標'],
+          );
+      }
+          )
         return this.limitPrecision(util.target.y);
     }
 
     getDirection (args, util) {
-        console.count('種類：動き');
-        console.count('向き');
+        console.log('種類：動き:向き');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES (?, ?, ? )", ['value_block','motion','向き'],
+          );
+      }
+          )
         return util.target.direction;
     }
 

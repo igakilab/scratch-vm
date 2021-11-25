@@ -16,6 +16,11 @@ const MathUtil = require('../util/math-util');
  *      Used for comparison when determining whether to clear a say/think bubble.
  */
 
+/**DB tool */
+var dbname = "scratch3.0 db";
+var dbversion = "1.0";
+var dbdescription = "scratch3.0のDatabase"
+var dbsize = 1000;
 class Scratch3LooksBlocks {
     constructor (runtime) {
         /**
@@ -330,8 +335,13 @@ class Scratch3LooksBlocks {
     say (args, util) {
         // @TODO in 2.0 calling say/think resets the right/left bias of the bubble
         this.runtime.emit(Scratch3LooksBlocks.SAY_OR_THINK, util.target, 'say', args.MESSAGE);
-        console.log("種類：見た目");
-        console.count(args.MESSAGE+'と言う');
+        console.log('種類：見た目:'+args.MESSAGE+'と言う');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks',args.MESSAGE+'と言う'],
+          );
+      }
+          )
     }
 
     say2 (args, util) {
@@ -352,15 +362,25 @@ class Scratch3LooksBlocks {
                 }
                 resolve();
             }, 1000 * args.SECS);
-            console.log("種類：見た目");
-            console.count(args.MESSAGE+'と'+args.SECS+'秒言う');
+            console.log('種類：見た目:'+args.MESSAGE+'と'+args.SECS+'秒言う');
+            var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks',args.MESSAGE+'と'+args.SECS+'秒言う'],
+          );
+      }
+          )
         });
     }
 
     think (args, util) {
         this.runtime.emit(Scratch3LooksBlocks.SAY_OR_THINK, util.target, 'think', args.MESSAGE);
-        console.log("種類：見た目");
-        console.count(args.MESSAGE+'と考える');
+        console.log('種類：見た目:'+args.MESSAGE+'と考える');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks',args.MESSAGE+'と考える'],
+          );
+      }
+          )
     }
 
     think2 (args, util) {
@@ -380,22 +400,38 @@ class Scratch3LooksBlocks {
                 }
                 resolve();
             }, 1000 * args.SECS);
-            console.count(args.MESSAGE+'と'+args.SECS+'考える');
+            console.log('種類：見た目:'+args.MESSAGE+'と'+args.SECS+'考える');
+            var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks',args.MESSAGE+'と'+args.SECS+'考える'],
+          );
+      }
+          )
         });
     }
 
     show (args, util) {
         util.target.setVisible(true);
         this._renderBubble(util.target);
-        console.log("種類：見た目");
-        console.count('表示する');
+        console.log('種類：見た目:表示する');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks','表示する'],
+          );
+      }
+          )
     }
 
     hide (args, util) {
         util.target.setVisible(false);
         this._renderBubble(util.target);
-        console.log("種類：見た目");
-        console.count('隠す');
+        console.log('種類：見た目:隠す');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks','隠す'],
+          );
+      }
+          )
     }
 
     /**
@@ -474,6 +510,13 @@ class Scratch3LooksBlocks {
             }
         }
         const newName = stage.getCostumes()[stage.currentCostume].name;
+        console.log('種類：見た目:背景が'+newName+'になったとき');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks',"背景が"+newName+"になったとき"],
+          );
+      }
+          )
         return this.runtime.startHats('event_whenbackdropswitchesto', {
             BACKDROP: newName
         });
@@ -481,22 +524,37 @@ class Scratch3LooksBlocks {
 
     switchCostume (args, util) {
         this._setCostume(util.target, args.COSTUME);
-        console.log("種類：見た目");
-        console.count('コスチュームを'+args.COSTUME+'にする');
+        console.log('種類：見た目:コスチュームを'+args.COSTUME+'にする');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks','コスチュームを'+args.COSTUME+'にする'],
+          );
+      }
+          )
     }
 
     nextCostume (args, util) {
         this._setCostume(
             util.target, util.target.currentCostume + 1, true
         );
-        console.log("種類：見た目");
-        console.count('次のコスチュームにする');
+        console.log('種類：見た目:次のコスチュームにする');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks','次のコスチュームにする'],
+          );
+      }
+          )
     }
 
     switchBackdrop (args) {
         this._setBackdrop(this.runtime.getTargetForStage(), args.BACKDROP);
-        console.log("種類：見た目");
-        console.count('背景を'+args.BACKDROP+'にする');
+        console.log('種類：見た目:背景を'+args.BACKDROP+'にする');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks','背景を'+args.BACKDROP+'にする'],
+          );
+      }
+          )
     }
 
     switchBackdropAndWait (args, util) {
@@ -542,8 +600,13 @@ class Scratch3LooksBlocks {
         this._setBackdrop(
             stage, stage.currentCostume + 1, true
         );
-        console.log("種類：見た目");
-        console.count('次の背景にする');
+        console.log('種類：見た目:次の背景にする');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks','次の背景にする'],
+          );
+      }
+          )
     }
 
     clampEffect (effect, value) {
@@ -570,8 +633,13 @@ class Scratch3LooksBlocks {
         let newValue = change + util.target.effects[effect];
         newValue = this.clampEffect(effect, newValue);
         util.target.setEffect(effect, newValue);
-        console.log("種類：見た目");
-        console.count(args.EFFECT+'の効果を'+args.CHANGE+'ずつ変える');
+        console.log('種類：見た目:'+args.EFFECT+'の効果を'+args.CHANGE+'ずつ変える');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks',args.EFFECT+'の効果を'+args.CHANGE+'ずつ変える'],
+          );
+      }
+          )
     }
 
     setEffect (args, util) {
@@ -579,28 +647,48 @@ class Scratch3LooksBlocks {
         let value = Cast.toNumber(args.VALUE);
         value = this.clampEffect(effect, value);
         util.target.setEffect(effect, value);
-        console.log("種類：見た目");
-        console.count(args.EFFECT+'の効果を'+args.VALUE+'にする');
+        console.log('種類：見た目:'+args.EFFECT+'の効果を'+args.VALUE+'にする');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks',args.EFFECT+'の効果を'+args.VALUE+'にする'],
+          );
+      }
+          )
     }
 
     clearEffects (args, util) {
         util.target.clearEffects();
-        console.log("種類：見た目");
-        console.count('画像効果をなくす');
+        console.log('種類：見た目:画像効果をなくす');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks','画像効果をなくす'],
+          );
+      }
+          )
     }
 
     changeSize (args, util) {
         const change = Cast.toNumber(args.CHANGE);
         util.target.setSize(util.target.size + change);
-        console.log("種類：見た目");
-        console.count('大きさを'+args.CHANGE+'ずつ変える');
+        console.log('種類：見た目:大きさを'+args.CHANGE+'ずつ変える');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks','大きさを'+args.CHANGE+'ずつ変える'],
+          );
+      }
+          )
     }
 
     setSize (args, util) {
         const size = Cast.toNumber(args.SIZE);
         util.target.setSize(size);
-        console.log("種類：見た目");
-        console.count('大きさを'+args.SIZE+'%にする');
+        console.log('種類：見た目:大きさを'+args.SIZE+'%にする');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks','大きさを'+args.SIZE+'%にする'],
+          );
+      }
+          )
     }
 
     goToFrontBack (args, util) {
@@ -611,8 +699,13 @@ class Scratch3LooksBlocks {
                 util.target.goToBack();
             }
         }
-        console.log("種類：見た目");
-        console.count(args.FRONT_BACK+'へ移動する');
+        console.log('種類：見た目:'+args.FRONT_BACK+'へ移動する');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks',args.FRONT_BACK+'へ移動する'],
+          );
+      }
+          )
     }
 
     goForwardBackwardLayers (args, util) {
@@ -623,13 +716,23 @@ class Scratch3LooksBlocks {
                 util.target.goBackwardLayers(Cast.toNumber(args.NUM));
             }
         }
-        console.log("種類：見た目");
-        console.count(args.NUM+'層'+args.FORWARD_BACKWARD);
+        console.log('種類：見た目:'+args.NUM+'層'+args.FORWARD_BACKWARD);
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','looks',args.NUM+'層'+args.FORWARD_BACKWARD],
+          );
+      }
+          )
     }
 
     getSize (args, util) {
-        console.log("種類：見た目");
-        console.count('大きさ');
+        console.log('種類：見た目:大きさ');
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['value_block','looks','大きさ'],
+          );
+      }
+          )
         return Math.round(util.target.size);
     }
 
@@ -638,8 +741,13 @@ class Scratch3LooksBlocks {
         if (args.NUMBER_NAME === 'number') {
             return stage.currentCostume + 1;
         }
-        console.log("種類：見た目");
-        console.count('背景の'+args.NUMBER_NAME);
+        console.log('種類：見た目:背景の'+args.NUMBER_NAME);
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['value_block','looks','背景の'+args.NUMBER_NAME],
+          );
+      }
+          )
         // Else return name
         return stage.getCostumes()[stage.currentCostume].name;
     }
@@ -648,8 +756,13 @@ class Scratch3LooksBlocks {
         if (args.NUMBER_NAME === 'number') {
             return util.target.currentCostume + 1;
         }
-        console.log("種類：見た目");
-        console.count('コスチュームの'+args.NUMBER_NAME);
+        console.log('種類：見た目:コスチュームの'+args.NUMBER_NAME);
+        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db.transaction(function (transact) {
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['value_block','looks','コスチュームの'+args.NUMBER_NAME],
+          );
+      }
+          )
         // Else return name
         return util.target.getCostumes()[util.target.currentCostume].name;
     }
