@@ -44,6 +44,11 @@ const defaultBlockPackages = {
 
 const defaultExtensionColors = ['#0FBD8C', '#0DA57A', '#0B8E69'];
 
+var dbsize = 1000;
+var dbname = "scratch3.0 db";
+var dbversion = "1.0";
+var dbdescription = "scratch3.0のDatabase"
+
 /**
  * Information used for converting Scratch argument types into scratch-blocks data.
  * @type {object.<ArgumentType, {shadowType: string, fieldType: string}>}
@@ -329,6 +334,15 @@ class Runtime extends EventEmitter {
 
         // Set an intial value for this.currentMSecs
         this.updateCurrentMSecs();
+
+        //Interval settings and calls for regular automatic database checks
+        let count = 0;
+        const countUp = () => {
+            //console.log(count++);
+            setTimeout(countUp, 10000);
+            this.dbcheck();
+        }
+        countUp();
 
         /**
          * Whether any primitive has requested a redraw.
@@ -1830,7 +1844,7 @@ class Runtime extends EventEmitter {
                 blockId: topBlockId,
                 fieldsOfInputs: hatFields
             } = script;
-console.log(topBlockId);
+            //console.log(topBlockId);
             // Match any requested fields.
             // For example: ensures that broadcasts match.
             // This needs to happen before the block is evaluated
@@ -2028,11 +2042,10 @@ console.log(topBlockId);
         for (let i = 0; i < this.targets.length; i++) {
             this.targets[i].onGreenFlag();
         }
-        console.log("種類：イベント");
-        console.log("緑の旗が押されたとき");
+        console.log('種類：イベント：緑の旗が押されたとき');
         var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
         db.transaction(function (transact) {
-        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ? )", ['events','GreenFlagの開始'],
+        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','events','GreenFlagの開始'],
           );
       }
           )
@@ -2648,6 +2661,30 @@ console.log(topBlockId);
      */
     updateCurrentMSecs () {
         this.currentMSecs = Date.now();
+    }
+
+    dbcheck(){
+        var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db3.transaction(
+            function (transact3) {
+                transact3.executeSql
+                ('DELETE FROM Linking_research WHERE num NOT IN ( SELECT num FROM( SELECT * FROM Linking_research as t1 WHERE 1 = (SELECT COUNT(*) FROM Linking_research as t2 WHERE t1.opcode = t2.opcode AND t1.timehms = t2.timehms AND t1.num >= t2.num)) AS tmp)',
+                 [],
+                 /* sqlの確認のための部分
+                 querySuccess, errorDB
+                 */
+                 );
+            }
+        );
+        /*
+        //sqlの確認用
+        var querySuccess = function(transact3,results){
+            console.log('成功');
+        };
+        var errorDB = function(err) {
+            console.log('消去に失敗');
+        };
+        */
     }
 }
 

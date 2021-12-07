@@ -10,6 +10,16 @@ const log = require('../util/log');
 const Variable = require('./variable');
 const getMonitorIdForBlockWithArgs = require('../util/get-monitor-id');
 
+/**DB tool */
+var dbsize = 1000;
+var dbname = "scratch3.0 db";
+var dbversion = "1.0";
+var dbdescription = "scratch3.0のDatabase"
+let num = 0;
+const numup = () => {
+    num++;
+}
+
 /**
  * @fileoverview
  * Store and mutate the VM block representation,
@@ -128,7 +138,26 @@ class Blocks {
       * @return {?string} ID of next block in the sequence
       */
     getNextBlock (id) {
+        //let nextBlockId = thread.target.blocks.getNextBlock(popped);
         const block = this._blocks[id];
+        console.log(block.opcode);
+        let DD = new Date();
+        let Hours = DD.getHours();
+        let Minutes = DD.getMinutes();
+        let Seconds = DD.getSeconds();
+        var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+        db3.transaction(function (tx3) {
+            tx3.executeSql("CREATE TABLE Linking_research (num,opcode,id,parent,next,timehms)", [],
+              );
+            }
+              )
+        db3.transaction(
+            function (transact3) {
+                numup();
+                transact3.executeSql("INSERT INTO Linking_research VALUES ( ?,?, ?,?,?,? )", [num,block.opcode,block.id,block.parent,block.next,Hours+':'+Minutes+':'+Seconds],
+                );
+            }
+            )
         return (typeof block === 'undefined') ? null : block.next;
     }
 
@@ -346,6 +375,8 @@ class Blocks {
             this.runtime.emitBlockDragUpdate(e.isOutside);
             break;
         case 'endDrag':
+            //今回の生成後の「移動」の定義は以下の命令とする
+        //console.log("ハンドル管理");
             this.runtime.emitBlockDragUpdate(false /* areBlocksOverGui */);
 
             // Drag blocks onto another sprite
@@ -355,6 +386,7 @@ class Blocks {
             }
             break;
         case 'delete':
+            //console.log('ブロック消去したんだyo!');
             // Don't accept delete events for missing blocks,
             // or shadow blocks being obscured.
             if (!this._blocks.hasOwnProperty(e.blockId) ||
@@ -589,7 +621,6 @@ class Blocks {
             } else {
                 // Changing the value in a dropdown
                 block.fields[args.name].value = args.value;
-
                 // The selected item in the sensing of block menu needs to change based on the
                 // selected target.  Set it to the first item in the menu list.
                 // TODO: (#1787)
@@ -603,6 +634,7 @@ class Blocks {
                 }
 
                 const flyoutBlock = block.shadow && block.parent ? this._blocks[block.parent] : block;
+                //console.log('キャラが移動');
                 if (flyoutBlock.isMonitored) {
                     this.runtime.requestUpdateMonitor(Map({
                         id: flyoutBlock.id,
@@ -794,6 +826,7 @@ class Blocks {
      * @param {!string} blockId Id of block to delete
      */
     deleteBlock (blockId) {
+        //console.log("deleteBlock");
         // @todo In runtime, stop threads running on this script.
 
         // Get block
@@ -882,6 +915,7 @@ class Blocks {
      * @param {string} newName The new name of the variable that was renamed
      */
     updateBlocksAfterVarRename (varId, newName) {
+        //console.log("updateBlocksAfterVarRename");
         const blocks = this._blocks;
         for (const blockId in blocks) {
             let varOrListField = null;
@@ -954,6 +988,7 @@ class Blocks {
      * @return {boolean} Returns true if any of the blocks were updated.
      */
     updateSensingOfReference (oldName, newName, targetName) {
+        //console.log("updateSensingOfReference");
         const blocks = this._blocks;
         let blockUpdated = false;
         for (const blockId in blocks) {
@@ -1011,6 +1046,7 @@ class Blocks {
      * does not exist on the block with the given id.
      */
     _getBackdropField (blockId) {
+        //console.log("_getBackdropField");
         const block = this.getBlock(blockId);
         if (block && block.fields.hasOwnProperty('BACKDROP')) {
             return block.fields.BACKDROP;
@@ -1026,6 +1062,7 @@ class Blocks {
      * does not exist on the block with the given id.
      */
     _getSpriteField (blockId) {
+        //console.log("_getSpriteField");
         const block = this.getBlock(blockId);
         if (!block) {
             return null;
@@ -1061,6 +1098,7 @@ class Blocks {
      * @return {string} String of XML representing this block and any children.
      */
     blockToXML (blockId, comments) {
+        //console.log("blockToXML");
         const block = this._blocks[blockId];
         // block should exist, but currently some blocks' next property point
         // to a blockId for non-existent blocks. Until we track down that behavior,
@@ -1140,6 +1178,7 @@ class Blocks {
      * @return {string} XML string representing a mutation.
      */
     mutationToXML (mutation) {
+        //console.log("mutationToXML");
         let mutationString = `<${mutation.tagName}`;
         for (const prop in mutation) {
             if (prop === 'children' || prop === 'tagName') continue;
@@ -1168,6 +1207,7 @@ class Blocks {
      * @return {!object} object of param key/values.
      */
     _getBlockParams (block) {
+        //console.log("_getBlockParams");
         const params = {};
         for (const key in block.fields) {
             params[key] = block.fields[key].value;
@@ -1232,6 +1272,7 @@ BlocksExecuteCache.getCached = function (blocks, blockId, CacheType) {
     }
 
     const block = blocks.getBlock(blockId);
+    console.log(blocks.getOpcode(block));
     if (typeof block === 'undefined') return null;
 
     if (typeof CacheType === 'undefined') {
