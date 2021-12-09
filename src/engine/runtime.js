@@ -2668,7 +2668,7 @@ class Runtime extends EventEmitter {
         db3.transaction(
             function (transact3) {
                 transact3.executeSql
-                ('DELETE FROM Linking_research WHERE num NOT IN ( SELECT num FROM( SELECT * FROM Linking_research as t1 WHERE 1 = (SELECT COUNT(*) FROM Linking_research as t2 WHERE t1.opcode = t2.opcode AND t1.timehms = t2.timehms AND t1.num >= t2.num)) AS tmp)',
+                ('DELETE FROM Linking_research WHERE num NOT IN ( SELECT num FROM( SELECT * FROM Linking_research as t1 WHERE 1 = (SELECT COUNT(*) FROM Linking_research as t2 WHERE t1.opcode = t2.opcode AND t1.time = t2.time AND t1.num <= t2.num)) AS tmp)',
                  [],
                  /* sqlの確認のための部分
                  querySuccess, errorDB

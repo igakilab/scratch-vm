@@ -140,21 +140,18 @@ class Blocks {
     getNextBlock (id) {
         //let nextBlockId = thread.target.blocks.getNextBlock(popped);
         const block = this._blocks[id];
-        console.log(block.opcode);
+        //console.log(block.opcode);
         let DD = new Date();
-        let Hours = DD.getHours();
-        let Minutes = DD.getMinutes();
-        let Seconds = DD.getSeconds();
         var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
         db3.transaction(function (tx3) {
-            tx3.executeSql("CREATE TABLE Linking_research (num,opcode,id,parent,next,timehms)", [],
+            tx3.executeSql("CREATE TABLE Linking_research (num,opcode,id,parent,next,time)", [],
               );
             }
               )
         db3.transaction(
             function (transact3) {
                 numup();
-                transact3.executeSql("INSERT INTO Linking_research VALUES ( ?,?, ?,?,?,? )", [num,block.opcode,block.id,block.parent,block.next,Hours+':'+Minutes+':'+Seconds],
+                transact3.executeSql("INSERT INTO Linking_research VALUES ( ?,?, ?,?,?,? )", [num,block.opcode,block.id,block.parent,block.next,DD],
                 );
             }
             )
