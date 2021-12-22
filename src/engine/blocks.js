@@ -19,6 +19,21 @@ let num = 0;
 const numup = () => {
     num++;
 }
+let num2 = 0;
+const numup2 = () => {
+    num2++;
+}
+let num3 = 0;
+const numup3 = () => {
+    num3++;
+}
+let num4 = 0;
+const numup4 = () => {
+    num4++;
+}
+
+var null1 = null;
+
 
 /**
  * @fileoverview
@@ -141,17 +156,52 @@ class Blocks {
         //let nextBlockId = thread.target.blocks.getNextBlock(popped);
         const block = this._blocks[id];
         //console.log(block.opcode);
-        let DD = new Date();
+         //日付オブジェクトを作成する
+ var dd = new Date();
+ //「年」を取得する
+ var yy = dd.getFullYear();
+ //「月」を所得する
+ var month = dd.getMonth();
+ //「日」を取得する
+ var day = dd.getDate();
+ //「時」を取得する
+ var hh = dd.getHours();
+ //「分」を取得する
+ var mm = dd.getMinutes();
+ //「秒」を取得する
+ var ss = dd.getSeconds();
+ if (yy < 10) {
+     yy = "0" + yy;
+     }
+ if (month < 10) {
+     month = "0" + month;
+     }
+ if (day < 10) {
+     day = "0" + day;
+     }
+ if (hh < 10) {
+     hh = "0" + hh;
+     }
+ if (mm < 10) {
+     mm = "0" + mm;
+     }
+ if (ss < 10) {
+     ss = "0" + ss;
+     }
+     const times = yy+'-'+month+'-'+day+' '+hh+':'+mm+':'+ss;
         var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db3.transaction(function (tx3) {
-            tx3.executeSql("CREATE TABLE Linking_research (num,opcode,id,parent,next,time)", [],
-              );
-            }
-              )
         db3.transaction(
             function (transact3) {
                 numup();
-                transact3.executeSql("INSERT INTO Linking_research VALUES ( ?,?, ?,?,?,? )", [num,block.opcode,block.id,block.parent,block.next,DD],
+                transact3.executeSql("INSERT INTO Linking_research VALUES ( ?,?, ?,?,?,? )", [num,block.opcode,block.id,block.parent,block.next,times],
+                );
+            }
+            )
+        let count = 1;
+        db3.transaction(
+            function (transact3) {
+                numup2();
+                transact3.executeSql("INSERT INTO count_research VALUES ( ?,?,? )", [num2,block.opcode,count],
                 );
             }
             )
@@ -339,7 +389,42 @@ class Blocks {
             this.runtime.toggleScript(e.blockId, {stackClick: true});
             return;
         }
+         //日付オブジェクトを作成する
+ var dd = new Date();
+ //「年」を取得する
+ var yy = dd.getFullYear();
+ //「月」を所得する
+ var month = dd.getMonth();
+ //「日」を取得する
+ var day = dd.getDate();
+ //「時」を取得する
+ var hh = dd.getHours();
+ //「分」を取得する
+ var mm = dd.getMinutes();
+ //「秒」を取得する
+ var ss = dd.getSeconds();
+ //「ミリ秒」を取得する
+ var ms = dd.getMilliseconds();
+ if (yy < 10) {
+     yy = "0" + yy;
+     }
+ if (month < 10) {
+     month = "0" + month;
+     }
+ if (day < 10) {
+     day = "0" + day;
+     }
+ if (hh < 10) {
+     hh = "0" + hh;
+     }
+ if (mm < 10) {
+     mm = "0" + mm;
+     }
+ if (ss < 10) {
+     ss = "0" + ss;
+     }
 
+ const timesnm = yy+'-'+month+'-'+day+' '+hh+':'+mm+':'+ss+':'+ms;
         // Block create/update/destroy
         switch (e.type) {
         case 'create': {
@@ -348,6 +433,101 @@ class Blocks {
             for (let i = 0; i < newBlocks.length; i++) {
                 this.createBlock(newBlocks[i]);
             }
+            console.log('create');
+            if(e.newParentId==undefined){
+                e.newParentId=null;
+            };
+            if(e.oldParentId==undefined){
+                e.oldParentId=null;
+            };
+            const move3='create';
+            if(e.blockId.indexOf('xposition')==-1&&e.blockId.indexOf('yposition')==-1&&e.blockId.indexOf('direction')==-1){
+                if(e.blockId.indexOf('pen')==-1&&e.blockId.indexOf('procedures')==-1&&e.blockId.indexOf('music')==-1){
+                if(e.blockId.indexOf('switchcostumeto')==-1&&e.blockId.indexOf('costumenumbername')==-1&&e.blockId.indexOf('size')==-1){
+                    if(e.blockId.indexOf('sound_playuntildone')==-1&&e.blockId.indexOf('sound_play')==-1&&e.blockId.indexOf('volume')==-1){
+                        if(e.blockId.indexOf('my variable')==-1&&e.blockId.indexOf('data_hidevariable')==-1){
+            if(e.blockId!='answer'&&e.blockId!='askandwait'&&e.blockId!='backdropnumbername'&&e.blockId!='control_create_clone_of'){
+                if(e.blockId!='control_delete_this_clone'&&e.blockId!='control_if'&&e.blockId!='control_if_else'&&e.blockId!='control_repeat'){
+                    if(e.blockId!='control_start_as_clone'&&e.blockId!='control_stop'&&e.blockId!='control_wait'&&e.blockId!='current'){
+                        if(e.blockId!='data_changevariableby'&&e.blockId!='data_setvariableto'&&e.blockId!='data_showvariable'&&e.blockId!='event_broadcast'){
+                            if(e.blockId!='event_broadcastandwait'&&e.blockId!='event_whenbackdropswitchesto'&&e.blockId!='event_whenbroadcastreceived'){
+                                if(e.blockId!='event_whenflagclicked'&&e.blockId!='event_whengreaterthan'&&e.blockId!='event_whenkeypressed'){
+                                    if(e.blockId!='event_whenstageclicked'&&e.blockId!='event_whenthisspriteclicked'&&e.blockId!='forever'){
+                                        if(e.blockId!='looks_changeeffectby'&&e.blockId!='looks_changesizeby'&&e.blockId!='looks_cleargraphiceffects'){
+                                            if(e.blockId!='looks_goforwardbackwardlayers'&&e.blockId!='looks_gotofrontback'&&e.blockId!='looks_hide'){
+                                                if(e.blockId!='looks_nextbackdrop'&&e.blockId!='looks_nextcostume'&&e.blockId!='looks_say'&&e.blockId!='looks_sayforsecs'){
+                                                    if(e.blockId!='looks_seteffectto'&&e.blockId!='looks_setsizeto'&&e.blockId!='looks_show'&&e.blockId!='looks_switchbackdropto'){
+                                                        if(e.blockId!='looks_switchbackdroptoandwait'&&e.blockId!='looks_thinkforsecs'&&e.blockId!='looks_think'){
+                                                            if(e.blockId!='loudness'&&e.blockId!='motion_changexby'&&e.blockId!='motion_changeyby'&&e.blockId!='motion_glidesecstoxy'){
+                                                                if(e.blockId!='motion_glideto'&&e.blockId!='motion_goto'&&e.blockId!='motion_gotoxy'&&e.blockId!='motion_ifonedgebounce'){
+                                                                    if(e.blockId!='motion_movesteps'&&e.blockId!='motion_pointindirection'&&e.blockId!='motion_pointtowards'){
+                                                                        if(e.blockId!='motion_setrotationstyle'&&e.blockId!='motion_setx'&&e.blockId!='motion_sety'){
+                                                                            if(e.blockId!='motion_turnleft'&&e.blockId!='motion_turnright'&&e.blockId!='of'&&e.blockId!='operator_add'){
+                                                                                if(e.blockId!='operator_contains'&&e.blockId!='operator_divide'&&e.blockId!='operator_equals'){
+                                                                                    if(e.blockId!='operator_gt'&&e.blockId!='operator_join'&&e.blockId!='operator_length'){
+                                                                                        if(e.blockId!='operator_letter_of'&&e.blockId!='operator_lt'&&e.blockId!='operator_mathop'){
+                                                                                            if(e.blockId!='operator_mod'&&e.blockId!='operator_multiply'&&e.blockId!='operator_not'){
+                                                                                                if(e.blockId!='operator_or'&&e.blockId!='operator_random'&&e.blockId!='operator_round'){
+                                                                                                    if(e.blockId!='operator_subtract'&&e.blockId!='repeat_until'&&e.blockId!='sensing_coloristouchingcolor'){
+                                                                                                        if(e.blockId!='sensing_dayssince2000'&&e.blockId!='sensing_distanceto'&&e.blockId!='sensing_keypressed'){
+                                                                                                            if(e.blockId!='sensing_mousedown'&&e.blockId!='sensing_mousex'&&e.blockId!='sensing_mousey'&&e.blockId!='sensing_resettimer'){
+                                                                                                                if(e.blockId!='sensing_setdragmode'&&e.blockId!='sensing_touchingcolor'&&e.blockId!='sensing_touchingobject'){
+                                                                                                                    if(e.blockId!='sensing_username'&&e.blockId!='sound_changeeffectby'&&e.blockId!='sound_changevolumeby'){
+                                                                                                                        if(e.blockId!='sound_cleareffects'&&e.blockId!='sound_seteffectto'&&e.blockId!='sound_setvolumeto'){
+                                                                                                                            if(e.blockId!='sound_stopallsounds'&&e.blockId!='timer'&&e.blockId!='undefined_sound_play'){
+                                                                                                                                if(e.blockId!='undefined_sound_playuntildone'&&e.blockId!='undefined_volume'&&e.blockId!='wait_until'&&e.blockId!='operator_and'){
+                                                                                                                                    var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+                                                                                                                                    db3.transaction(
+                                                                                                                                        function (transact3) {
+                                                                                                                                            numup3();
+                                                                                                                                            transact3.executeSql("INSERT INTO move_research VALUES ( ?,?,?,?,?,?,?,? )", [num3,null1,e.blockId,e.newParentId,e.oldParentId,timesnm,e.workspaceId,move3],
+                                                                                                                                            );
+                                                                                                                                        }
+                                                                                                                                    );
+                                                                                                                                    db3.transaction(
+                                                                                                                                        function (transact3) {
+                                                                                                                                            numup4();
+                                                                                                                                            const count1 =1;
+                                                                                                                                            transact3.executeSql("INSERT INTO movecount_research VALUES ( ?,?,?,?,?,? )", [num4,null1,e.blockId,move3,count1,timesnm],
+                                                                                                                                            );
+                                                                                                                                        }
+                                                                                                                                    );
+                                                                                                                                };
+                                                                                                                            };
+                                                                                                                        };
+                                                                                                                    };
+                                                                                                                    };
+                                                                                                                };
+                                                                                                            };
+                                                                                                        };
+                                                                                                                };
+                                                                                                            };
+                                                                                                        };
+                                                                                                    };
+                                                                                                };
+                                                                                            };
+                                                                                        };
+                                                                                    };
+                                                                                };
+                                                                            };
+                                                                        };
+                                                                    ;
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                };
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
             break;
         }
         case 'change':
@@ -357,30 +537,6 @@ class Blocks {
                 name: e.name,
                 value: e.newValue
             });
-            break;
-        case 'move':
-            this.moveBlock({
-                id: e.blockId,
-                oldParent: e.oldParentId,
-                oldInput: e.oldInputName,
-                newParent: e.newParentId,
-                newInput: e.newInputName,
-                newCoordinate: e.newCoordinate
-            });
-            break;
-        case 'dragOutside':
-            this.runtime.emitBlockDragUpdate(e.isOutside);
-            break;
-        case 'endDrag':
-            //今回の生成後の「移動」の定義は以下の命令とする
-        //console.log("ハンドル管理");
-            this.runtime.emitBlockDragUpdate(false /* areBlocksOverGui */);
-
-            // Drag blocks onto another sprite
-            if (e.isOutside) {
-                const newBlocks = adapter(e);
-                this.runtime.emitBlockEndDrag(newBlocks, e.blockId);
-            }
             break;
         case 'delete':
             //console.log('ブロック消去したんだyo!');
@@ -395,6 +551,222 @@ class Blocks {
                 this.runtime.quietGlow(e.blockId);
             }
             this.deleteBlock(e.blockId);
+            console.log('delete');
+            if(e.newParentId==undefined){
+                e.newParentId=null;
+            };
+            if(e.oldParentId==undefined){
+                e.oldParentId=null;
+            };
+            const move2='delete';
+            if(e.blockId.indexOf('pen')==-1&&e.blockId.indexOf('procedures')==-1&&e.blockId.indexOf('music')==-1){
+            if(e.blockId.indexOf('xposition')==-1&&e.blockId.indexOf('yposition')==-1&&e.blockId.indexOf('direction')==-1){
+                if(e.blockId.indexOf('switchcostumeto')==-1&&e.blockId.indexOf('costumenumbername')==-1&&e.blockId.indexOf('size')==-1){
+                    if(e.blockId.indexOf('sound_playuntildone')==-1&&e.blockId.indexOf('sound_play')==-1&&e.blockId.indexOf('volume')==-1){
+                        if(e.blockId.indexOf('my variable')==-1&&e.blockId.indexOf('data_hidevariable')==-1){
+            if(e.blockId!='answer'&&e.blockId!='askandwait'&&e.blockId!='backdropnumbername'&&e.blockId!='control_create_clone_of'){
+                if(e.blockId!='control_delete_this_clone'&&e.blockId!='control_if'&&e.blockId!='control_if_else'&&e.blockId!='control_repeat'){
+                    if(e.blockId!='control_start_as_clone'&&e.blockId!='control_stop'&&e.blockId!='control_wait'&&e.blockId!='current'){
+                        if(e.blockId!='data_changevariableby'&&e.blockId!='data_setvariableto'&&e.blockId!='data_showvariable'&&e.blockId!='event_broadcast'){
+                            if(e.blockId!='event_broadcastandwait'&&e.blockId!='event_whenbackdropswitchesto'&&e.blockId!='event_whenbroadcastreceived'){
+                                if(e.blockId!='event_whenflagclicked'&&e.blockId!='event_whengreaterthan'&&e.blockId!='event_whenkeypressed'){
+                                    if(e.blockId!='event_whenstageclicked'&&e.blockId!='event_whenthisspriteclicked'&&e.blockId!='forever'){
+                                        if(e.blockId!='looks_changeeffectby'&&e.blockId!='looks_changesizeby'&&e.blockId!='looks_cleargraphiceffects'){
+                                            if(e.blockId!='looks_goforwardbackwardlayers'&&e.blockId!='looks_gotofrontback'&&e.blockId!='looks_hide'){
+                                                if(e.blockId!='looks_nextbackdrop'&&e.blockId!='looks_nextcostume'&&e.blockId!='looks_say'&&e.blockId!='looks_sayforsecs'){
+                                                    if(e.blockId!='looks_seteffectto'&&e.blockId!='looks_setsizeto'&&e.blockId!='looks_show'&&e.blockId!='looks_switchbackdropto'){
+                                                        if(e.blockId!='looks_switchbackdroptoandwait'&&e.blockId!='looks_thinkforsecs'&&e.blockId!='looks_think'){
+                                                            if(e.blockId!='loudness'&&e.blockId!='motion_changexby'&&e.blockId!='motion_changeyby'&&e.blockId!='motion_glidesecstoxy'){
+                                                                if(e.blockId!='motion_glideto'&&e.blockId!='motion_goto'&&e.blockId!='motion_gotoxy'&&e.blockId!='motion_ifonedgebounce'){
+                                                                    if(e.blockId!='motion_movesteps'&&e.blockId!='motion_pointindirection'&&e.blockId!='motion_pointtowards'){
+                                                                        if(e.blockId!='motion_setrotationstyle'&&e.blockId!='motion_setx'&&e.blockId!='motion_sety'){
+                                                                            if(e.blockId!='motion_turnleft'&&e.blockId!='motion_turnright'&&e.blockId!='of'&&e.blockId!='operator_add'){
+                                                                                if(e.blockId!='operator_contains'&&e.blockId!='operator_divide'&&e.blockId!='operator_equals'){
+                                                                                    if(e.blockId!='operator_gt'&&e.blockId!='operator_join'&&e.blockId!='operator_length'){
+                                                                                        if(e.blockId!='operator_letter_of'&&e.blockId!='operator_lt'&&e.blockId!='operator_mathop'){
+                                                                                            if(e.blockId!='operator_mod'&&e.blockId!='operator_multiply'&&e.blockId!='operator_not'){
+                                                                                                if(e.blockId!='operator_or'&&e.blockId!='operator_random'&&e.blockId!='operator_round'){
+                                                                                                    if(e.blockId!='operator_subtract'&&e.blockId!='repeat_until'&&e.blockId!='sensing_coloristouchingcolor'){
+                                                                                                        if(e.blockId!='sensing_dayssince2000'&&e.blockId!='sensing_distanceto'&&e.blockId!='sensing_keypressed'){
+                                                                                                            if(e.blockId!='sensing_mousedown'&&e.blockId!='sensing_mousex'&&e.blockId!='sensing_mousey'&&e.blockId!='sensing_resettimer'){
+                                                                                                                if(e.blockId!='sensing_setdragmode'&&e.blockId!='sensing_touchingcolor'&&e.blockId!='sensing_touchingobject'){
+                                                                                                                    if(e.blockId!='sensing_username'&&e.blockId!='sound_changeeffectby'&&e.blockId!='sound_changevolumeby'){
+                                                                                                                        if(e.blockId!='sound_cleareffects'&&e.blockId!='sound_seteffectto'&&e.blockId!='sound_setvolumeto'){
+                                                                                                                            if(e.blockId!='sound_stopallsounds'&&e.blockId!='timer'&&e.blockId!='undefined_sound_play'){
+                                                                                                                                if(e.blockId!='undefined_sound_playuntildone'&&e.blockId!='undefined_volume'&&e.blockId!='wait_until'&&e.blockId!='operator_and'){
+                                                                                                                                    var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+                                                                                                                                    db3.transaction(
+                                                                                                                                        function (transact3) {
+                                                                                                                                            numup3();
+                                                                                                                                            transact3.executeSql("INSERT INTO move_research VALUES ( ?,?,?,?,?,?,?,? )", [num3,null1,e.blockId,e.newParentId,e.oldParentId,timesnm,e.workspaceId,move2],
+                                                                                                                                            );
+                                                                                                                                        }
+                                                                                                                                    );
+                                                                                                                                    db3.transaction(
+                                                                                                                                        function (transact3) {
+                                                                                                                                            numup4();
+                                                                                                                                            const count1 =1;
+                                                                                                                                            transact3.executeSql("INSERT INTO movecount_research VALUES ( ?,?,?,?,?,? )", [num4,null1,e.blockId,move2,count1,timesnm],
+                                                                                                                                            );
+                                                                                                                                        }
+                                                                                                                                    );
+                                                                                                                                };
+                                                                                                                            };
+                                                                                                                        };
+                                                                                                                    };
+                                                                                                                    };
+                                                                                                                };
+                                                                                                            };
+                                                                                                        };
+                                                                                                                };
+                                                                                                            };
+                                                                                                        };
+                                                                                                    };
+                                                                                                };
+                                                                                            };
+                                                                                        };
+                                                                                    };
+                                                                                };
+                                                                            };
+                                                                        };
+                                                                    ;
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                };
+                            };
+                        };
+                    };
+                };
+            };
+        };
+        };
+            break;
+        case 'move':
+            this.moveBlock({
+                id: e.blockId,
+                oldParent: e.oldParentId,
+                oldInput: e.oldInputName,
+                newParent: e.newParentId,
+                newInput: e.newInputName,
+                newCoordinate: e.newCoordinate
+            });
+            console.log('move');
+            if(e.newParentId==undefined){
+                e.newParentId=null;
+            };
+            if(e.oldParentId==undefined){
+                e.oldParentId=null;
+            };
+            const move='move';
+            if(e.blockId.indexOf('pen')==-1&&e.blockId.indexOf('procedures')==-1&&e.blockId.indexOf('music')==-1){
+            if(e.blockId.indexOf('xposition')==-1&&e.blockId.indexOf('yposition')==-1&&e.blockId.indexOf('direction')==-1){
+                if(e.blockId.indexOf('switchcostumeto')==-1&&e.blockId.indexOf('costumenumbername')==-1&&e.blockId.indexOf('size')==-1){
+                    if(e.blockId.indexOf('sound_playuntildone')==-1&&e.blockId.indexOf('sound_play')==-1&&e.blockId.indexOf('volume')==-1){
+                        if(e.blockId.indexOf('my variable')==-1&&e.blockId.indexOf('data_hidevariable')==-1){
+            if(e.blockId!='answer'&&e.blockId!='askandwait'&&e.blockId!='backdropnumbername'&&e.blockId!='control_create_clone_of'){
+                if(e.blockId!='control_delete_this_clone'&&e.blockId!='control_if'&&e.blockId!='control_if_else'&&e.blockId!='control_repeat'){
+                    if(e.blockId!='control_start_as_clone'&&e.blockId!='control_stop'&&e.blockId!='control_wait'&&e.blockId!='current'){
+                        if(e.blockId!='data_changevariableby'&&e.blockId!='data_setvariableto'&&e.blockId!='data_showvariable'&&e.blockId!='event_broadcast'){
+                            if(e.blockId!='event_broadcastandwait'&&e.blockId!='event_whenbackdropswitchesto'&&e.blockId!='event_whenbroadcastreceived'){
+                                if(e.blockId!='event_whenflagclicked'&&e.blockId!='event_whengreaterthan'&&e.blockId!='event_whenkeypressed'){
+                                    if(e.blockId!='event_whenstageclicked'&&e.blockId!='event_whenthisspriteclicked'&&e.blockId!='forever'){
+                                        if(e.blockId!='looks_changeeffectby'&&e.blockId!='looks_changesizeby'&&e.blockId!='looks_cleargraphiceffects'){
+                                            if(e.blockId!='looks_goforwardbackwardlayers'&&e.blockId!='looks_gotofrontback'&&e.blockId!='looks_hide'){
+                                                if(e.blockId!='looks_nextbackdrop'&&e.blockId!='looks_nextcostume'&&e.blockId!='looks_say'&&e.blockId!='looks_sayforsecs'){
+                                                    if(e.blockId!='looks_seteffectto'&&e.blockId!='looks_setsizeto'&&e.blockId!='looks_show'&&e.blockId!='looks_switchbackdropto'){
+                                                        if(e.blockId!='looks_switchbackdroptoandwait'&&e.blockId!='looks_thinkforsecs'&&e.blockId!='looks_think'){
+                                                            if(e.blockId!='loudness'&&e.blockId!='motion_changexby'&&e.blockId!='motion_changeyby'&&e.blockId!='motion_glidesecstoxy'){
+                                                                if(e.blockId!='motion_glideto'&&e.blockId!='motion_goto'&&e.blockId!='motion_gotoxy'&&e.blockId!='motion_ifonedgebounce'){
+                                                                    if(e.blockId!='motion_movesteps'&&e.blockId!='motion_pointindirection'&&e.blockId!='motion_pointtowards'){
+                                                                        if(e.blockId!='motion_setrotationstyle'&&e.blockId!='motion_setx'&&e.blockId!='motion_sety'){
+                                                                            if(e.blockId!='motion_turnleft'&&e.blockId!='motion_turnright'&&e.blockId!='of'&&e.blockId!='operator_add'){
+                                                                                if(e.blockId!='operator_contains'&&e.blockId!='operator_divide'&&e.blockId!='operator_equals'){
+                                                                                    if(e.blockId!='operator_gt'&&e.blockId!='operator_join'&&e.blockId!='operator_length'){
+                                                                                        if(e.blockId!='operator_letter_of'&&e.blockId!='operator_lt'&&e.blockId!='operator_mathop'){
+                                                                                            if(e.blockId!='operator_mod'&&e.blockId!='operator_multiply'&&e.blockId!='operator_not'){
+                                                                                                if(e.blockId!='operator_or'&&e.blockId!='operator_random'&&e.blockId!='operator_round'){
+                                                                                                    if(e.blockId!='operator_subtract'&&e.blockId!='repeat_until'&&e.blockId!='sensing_coloristouchingcolor'){
+                                                                                                        if(e.blockId!='sensing_dayssince2000'&&e.blockId!='sensing_distanceto'&&e.blockId!='sensing_keypressed'){
+                                                                                                            if(e.blockId!='sensing_mousedown'&&e.blockId!='sensing_mousex'&&e.blockId!='sensing_mousey'&&e.blockId!='sensing_resettimer'){
+                                                                                                                if(e.blockId!='sensing_setdragmode'&&e.blockId!='sensing_touchingcolor'&&e.blockId!='sensing_touchingobject'){
+                                                                                                                    if(e.blockId!='sensing_username'&&e.blockId!='sound_changeeffectby'&&e.blockId!='sound_changevolumeby'){
+                                                                                                                        if(e.blockId!='sound_cleareffects'&&e.blockId!='sound_seteffectto'&&e.blockId!='sound_setvolumeto'){
+                                                                                                                            if(e.blockId!='sound_stopallsounds'&&e.blockId!='timer'&&e.blockId!='undefined_sound_play'){
+                                                                                                                                if(e.blockId!='undefined_sound_playuntildone'&&e.blockId!='undefined_volume'&&e.blockId!='wait_until'&&e.blockId!='operator_and'){
+                                                                                                                                    var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+                                                                                                                                    db3.transaction(
+                                                                                                                                        function (transact3) {
+                                                                                                                                            numup3();
+                                                                                                                                            transact3.executeSql("INSERT INTO move_research VALUES ( ?,?,?,?,?,?,?,? )", [num3,null1,e.blockId,e.newParentId,e.oldParentId,timesnm,e.workspaceId,move],
+                                                                                                                                            );
+                                                                                                                                        }
+                                                                                                                                    );
+                                                                                                                                    db3.transaction(
+                                                                                                                                        function (transact3) {
+                                                                                                                                            numup4();
+                                                                                                                                            const count1 =1;
+                                                                                                                                            transact3.executeSql("INSERT INTO movecount_research VALUES ( ?,?,?,?,?,? )", [num4,null1,e.blockId,move,count1,timesnm],
+                                                                                                                                            );
+                                                                                                                                        }
+                                                                                                                                    );
+                                                                                                                                };
+                                                                                                                            };
+                                                                                                                        };
+                                                                                                                    };
+                                                                                                                    };
+                                                                                                                };
+                                                                                                            };
+                                                                                                        };
+                                                                                                                };
+                                                                                                            };
+                                                                                                        };
+                                                                                                    };
+                                                                                                };
+                                                                                            };
+                                                                                        };
+                                                                                    };
+                                                                                };
+                                                                            };
+                                                                        };
+                                                                    ;
+                                                                };
+                                                            };
+                                                        };
+                                                    };
+                                                };
+                                            };
+                                        };
+                                    };
+                                };
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+
+
+            break;
+        case 'dragOutside':
+            this.runtime.emitBlockDragUpdate(e.isOutside);
+            break;
+        case 'endDrag':
+            //今回の生成後の「移動」の定義は以下の命令とする
+        //console.log("ハンドル管理");
+            this.runtime.emitBlockDragUpdate(false /* areBlocksOverGui */);
+
+            // Drag blocks onto another sprite
+            if (e.isOutside) {
+                const newBlocks = adapter(e);
+                this.runtime.emitBlockEndDrag(newBlocks, e.blockId);
+            }
             break;
         case 'var_create':
             // Check if the variable being created is global or local
@@ -424,6 +796,7 @@ class Blocks {
                 stage.createVariable(e.varId, e.varName, e.varType, e.isCloud);
                 this.emitProjectChanged();
             }
+            console.log('var_create');
             break;
         case 'var_rename':
             if (editingTarget && editingTarget.variables.hasOwnProperty(e.varId)) {
@@ -443,12 +816,14 @@ class Blocks {
                 }
             }
             this.emitProjectChanged();
+            console.log('var_rename');
             break;
         case 'var_delete': {
             const target = (editingTarget && editingTarget.variables.hasOwnProperty(e.varId)) ?
                 editingTarget : stage;
             target.deleteVariable(e.varId);
             this.emitProjectChanged();
+            console.log('var_delete');
             break;
         }
         case 'comment_create':
@@ -470,6 +845,7 @@ class Blocks {
                 }
             }
             this.emitProjectChanged();
+            console.log('comment_create');
             break;
         case 'comment_change':
             if (this.runtime.getEditingTarget()) {
@@ -492,6 +868,7 @@ class Blocks {
                 }
                 this.emitProjectChanged();
             }
+            console.log('comment_change');
             break;
         case 'comment_move':
             if (this.runtime.getEditingTarget()) {
@@ -507,6 +884,7 @@ class Blocks {
 
                 this.emitProjectChanged();
             }
+            console.log('comment_change');
             break;
         case 'comment_delete':
             if (this.runtime.getEditingTarget()) {
@@ -530,6 +908,7 @@ class Blocks {
 
                 this.emitProjectChanged();
             }
+            console.log('comment_delete');
             break;
         }
     }
@@ -582,6 +961,7 @@ class Blocks {
         // A new block was actually added to the block container,
         // emit a project changed event
         this.emitProjectChanged();
+        console.log('createblock');
     }
 
     /**
