@@ -192,17 +192,12 @@ class Blocks {
         var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
         db3.transaction(
             function (transact3) {
-                numup();
-                transact3.executeSql("INSERT INTO Linking_research VALUES ( ?,?, ?,?,?,? )", [num,block.opcode,block.id,block.parent,block.next,times],
+                if(id.includes('my variable') !== true){
+                    numup();
+                    console.log(block);
+                transact3.executeSql("INSERT INTO Running_Table VALUES ( ?,?, ?,?,?,? )", [num,block.opcode,block.parent,block.id,block.next,times],
                 );
-            }
-            )
-        let count = 1;
-        db3.transaction(
-            function (transact3) {
-                numup2();
-                transact3.executeSql("INSERT INTO count_research VALUES ( ?,?,? )", [num2,block.opcode,count],
-                );
+                };
             }
             )
         return (typeof block === 'undefined') ? null : block.next;
@@ -389,42 +384,7 @@ class Blocks {
             this.runtime.toggleScript(e.blockId, {stackClick: true});
             return;
         }
-         //日付オブジェクトを作成する
- var dd = new Date();
- //「年」を取得する
- var yy = dd.getFullYear();
- //「月」を所得する
- var month = dd.getMonth();
- //「日」を取得する
- var day = dd.getDate();
- //「時」を取得する
- var hh = dd.getHours();
- //「分」を取得する
- var mm = dd.getMinutes();
- //「秒」を取得する
- var ss = dd.getSeconds();
- //「ミリ秒」を取得する
- var ms = dd.getMilliseconds();
- if (yy < 10) {
-     yy = "0" + yy;
-     }
- if (month < 10) {
-     month = "0" + month;
-     }
- if (day < 10) {
-     day = "0" + day;
-     }
- if (hh < 10) {
-     hh = "0" + hh;
-     }
- if (mm < 10) {
-     mm = "0" + mm;
-     }
- if (ss < 10) {
-     ss = "0" + ss;
-     }
 
- const timesnm = yy+'-'+month+'-'+day+' '+hh+':'+mm+':'+ss+':'+ms;
         // Block create/update/destroy
         switch (e.type) {
         case 'create': {
@@ -433,101 +393,22 @@ class Blocks {
             for (let i = 0; i < newBlocks.length; i++) {
                 this.createBlock(newBlocks[i]);
             }
-            console.log('create');
-            if(e.newParentId==undefined){
-                e.newParentId=null;
-            };
-            if(e.oldParentId==undefined){
-                e.oldParentId=null;
-            };
-            const move3='create';
-            if(e.blockId.indexOf('xposition')==-1&&e.blockId.indexOf('yposition')==-1&&e.blockId.indexOf('direction')==-1){
-                if(e.blockId.indexOf('pen')==-1&&e.blockId.indexOf('procedures')==-1&&e.blockId.indexOf('music')==-1){
-                if(e.blockId.indexOf('switchcostumeto')==-1&&e.blockId.indexOf('costumenumbername')==-1&&e.blockId.indexOf('size')==-1){
-                    if(e.blockId.indexOf('sound_playuntildone')==-1&&e.blockId.indexOf('sound_play')==-1&&e.blockId.indexOf('volume')==-1){
-                        if(e.blockId.indexOf('my variable')==-1&&e.blockId.indexOf('data_hidevariable')==-1){
-            if(e.blockId!='answer'&&e.blockId!='askandwait'&&e.blockId!='backdropnumbername'&&e.blockId!='control_create_clone_of'){
-                if(e.blockId!='control_delete_this_clone'&&e.blockId!='control_if'&&e.blockId!='control_if_else'&&e.blockId!='control_repeat'){
-                    if(e.blockId!='control_start_as_clone'&&e.blockId!='control_stop'&&e.blockId!='control_wait'&&e.blockId!='current'){
-                        if(e.blockId!='data_changevariableby'&&e.blockId!='data_setvariableto'&&e.blockId!='data_showvariable'&&e.blockId!='event_broadcast'){
-                            if(e.blockId!='event_broadcastandwait'&&e.blockId!='event_whenbackdropswitchesto'&&e.blockId!='event_whenbroadcastreceived'){
-                                if(e.blockId!='event_whenflagclicked'&&e.blockId!='event_whengreaterthan'&&e.blockId!='event_whenkeypressed'){
-                                    if(e.blockId!='event_whenstageclicked'&&e.blockId!='event_whenthisspriteclicked'&&e.blockId!='forever'){
-                                        if(e.blockId!='looks_changeeffectby'&&e.blockId!='looks_changesizeby'&&e.blockId!='looks_cleargraphiceffects'){
-                                            if(e.blockId!='looks_goforwardbackwardlayers'&&e.blockId!='looks_gotofrontback'&&e.blockId!='looks_hide'){
-                                                if(e.blockId!='looks_nextbackdrop'&&e.blockId!='looks_nextcostume'&&e.blockId!='looks_say'&&e.blockId!='looks_sayforsecs'){
-                                                    if(e.blockId!='looks_seteffectto'&&e.blockId!='looks_setsizeto'&&e.blockId!='looks_show'&&e.blockId!='looks_switchbackdropto'){
-                                                        if(e.blockId!='looks_switchbackdroptoandwait'&&e.blockId!='looks_thinkforsecs'&&e.blockId!='looks_think'){
-                                                            if(e.blockId!='loudness'&&e.blockId!='motion_changexby'&&e.blockId!='motion_changeyby'&&e.blockId!='motion_glidesecstoxy'){
-                                                                if(e.blockId!='motion_glideto'&&e.blockId!='motion_goto'&&e.blockId!='motion_gotoxy'&&e.blockId!='motion_ifonedgebounce'){
-                                                                    if(e.blockId!='motion_movesteps'&&e.blockId!='motion_pointindirection'&&e.blockId!='motion_pointtowards'){
-                                                                        if(e.blockId!='motion_setrotationstyle'&&e.blockId!='motion_setx'&&e.blockId!='motion_sety'){
-                                                                            if(e.blockId!='motion_turnleft'&&e.blockId!='motion_turnright'&&e.blockId!='of'&&e.blockId!='operator_add'){
-                                                                                if(e.blockId!='operator_contains'&&e.blockId!='operator_divide'&&e.blockId!='operator_equals'){
-                                                                                    if(e.blockId!='operator_gt'&&e.blockId!='operator_join'&&e.blockId!='operator_length'){
-                                                                                        if(e.blockId!='operator_letter_of'&&e.blockId!='operator_lt'&&e.blockId!='operator_mathop'){
-                                                                                            if(e.blockId!='operator_mod'&&e.blockId!='operator_multiply'&&e.blockId!='operator_not'){
-                                                                                                if(e.blockId!='operator_or'&&e.blockId!='operator_random'&&e.blockId!='operator_round'){
-                                                                                                    if(e.blockId!='operator_subtract'&&e.blockId!='repeat_until'&&e.blockId!='sensing_coloristouchingcolor'){
-                                                                                                        if(e.blockId!='sensing_dayssince2000'&&e.blockId!='sensing_distanceto'&&e.blockId!='sensing_keypressed'){
-                                                                                                            if(e.blockId!='sensing_mousedown'&&e.blockId!='sensing_mousex'&&e.blockId!='sensing_mousey'&&e.blockId!='sensing_resettimer'){
-                                                                                                                if(e.blockId!='sensing_setdragmode'&&e.blockId!='sensing_touchingcolor'&&e.blockId!='sensing_touchingobject'){
-                                                                                                                    if(e.blockId!='sensing_username'&&e.blockId!='sound_changeeffectby'&&e.blockId!='sound_changevolumeby'){
-                                                                                                                        if(e.blockId!='sound_cleareffects'&&e.blockId!='sound_seteffectto'&&e.blockId!='sound_setvolumeto'){
-                                                                                                                            if(e.blockId!='sound_stopallsounds'&&e.blockId!='timer'&&e.blockId!='undefined_sound_play'){
-                                                                                                                                if(e.blockId!='undefined_sound_playuntildone'&&e.blockId!='undefined_volume'&&e.blockId!='wait_until'&&e.blockId!='operator_and'){
-                                                                                                                                    var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-                                                                                                                                    db3.transaction(
-                                                                                                                                        function (transact3) {
-                                                                                                                                            numup3();
-                                                                                                                                            transact3.executeSql("INSERT INTO move_research VALUES ( ?,?,?,?,?,?,?,? )", [num3,null1,e.blockId,e.newParentId,e.oldParentId,timesnm,e.workspaceId,move3],
-                                                                                                                                            );
-                                                                                                                                        }
-                                                                                                                                    );
-                                                                                                                                    db3.transaction(
-                                                                                                                                        function (transact3) {
-                                                                                                                                            numup4();
-                                                                                                                                            const count1 =1;
-                                                                                                                                            transact3.executeSql("INSERT INTO movecount_research VALUES ( ?,?,?,?,?,? )", [num4,null1,e.blockId,move3,count1,timesnm],
-                                                                                                                                            );
-                                                                                                                                        }
-                                                                                                                                    );
-                                                                                                                                };
-                                                                                                                            };
-                                                                                                                        };
-                                                                                                                    };
-                                                                                                                    };
-                                                                                                                };
-                                                                                                            };
-                                                                                                        };
-                                                                                                                };
-                                                                                                            };
-                                                                                                        };
-                                                                                                    };
-                                                                                                };
-                                                                                            };
-                                                                                        };
-                                                                                    };
-                                                                                };
-                                                                            };
-                                                                        };
-                                                                    ;
-                                                                };
-                                                            };
-                                                        };
-                                                    };
-                                                };
-                                            };
-                                        };
-                                    };
-                                };
-                            };
-                        };
-                    };
+            //起動時の名称登録の除外
+            if(e.blockId.includes('yposition') !== true&&e.blockId.includes('direction') !== true&&e.blockId.includes('switchcostumeto') !== true&&e.blockId.includes('costumenumbername') !== true&&e.blockId.includes('size') !== true&&e.blockId.includes('sound_playuntildone') !== true&&e.blockId.includes('sound_play') !== true&&e.blockId.includes('volume') !== true&&e.blockId.includes('my variable') !== true){
+            if(e.blockId.includes('xposition') !== true&&e.blockId!=='pen'&&e.blockId!=='procedures'&&e.blockId!=='music'&&e.blockId!=='yposition'&&e.blockId!=='direction'&&e.blockId!='event_whenflagclicked'&&e.blockId!='event_whengreaterthan'&&e.blockId!='event_whenkeypressed'&&e.blockId!='operator_gt'&&e.blockId!='operator_join'&&e.blockId!='operator_length'&&e.blockId!='operator_letter_of'&&e.blockId!='operator_lt'&&e.blockId!='operator_mathop'&&e.blockId!='motion_pointtowards'&&e.blockId!='sensing_setdragmode'&&e.blockId!='sensing_touchingcolor'&&e.blockId!='sensing_touchingobject'&&e.blockId!='sensing_mousedown'&&e.blockId!='sensing_mousex'&&e.blockId!='sensing_mousey'&&e.blockId!='sensing_resettimer'&&e.blockId!='control_start_as_clone'&&e.blockId!='control_stop'&&e.blockId!='control_wait'&&e.blockId!='current'&&e.blockId!='data_changevariableby'&&e.blockId!='data_setvariableto'&&e.blockId!='data_showvariable'&&e.blockId!='event_broadcast'&&e.blockId!='operator_or'&&e.blockId!='operator_random'&&e.blockId!='operator_round'&&e.blockId!='operator_mod'&&e.blockId!='operator_multiply'&&e.blockId!='operator_not'&&e.blockId!='motion_pointindirection'&&e.blockId!='event_whenstageclicked'&&e.blockId!='event_whenthisspriteclicked'&&e.blockId!='forever'&&e.blockId!='looks_changeeffectby'&&e.blockId!='looks_changesizeby'&&e.blockId!='looks_cleargraphiceffects'&&e.blockId!='sensing_username'&&e.blockId!='sound_changeeffectby'&&e.blockId!='sound_changevolumeby'&&e.blockId!='sound_cleareffects'&&e.blockId!='sound_seteffectto'&&e.blockId!='sound_setvolumeto'&&e.blockId!='motion_setrotationstyle'){
+                if(e.blockId!=='xposition'&&e.blockId!=='switchcostumeto'&&e.blockId!=='costumenumbername'&&e.blockId!=='size'&&e.blockId!='event_broadcastandwait'&&e.blockId!='event_whenbackdropswitchesto'&&e.blockId!='event_whenbroadcastreceived'&&e.blockId!='motion_turnleft'&&e.blockId!='motion_turnright'&&e.blockId!='of'&&e.blockId!='operator_add'&&e.blockId!='operator_contains'&&e.blockId!='operator_divide'&&e.blockId!='operator_equals'&&e.blockId!='operator_subtract'&&e.blockId!='repeat_until'&&e.blockId!='sensing_coloristouchingcolor'&&e.blockId!='sensing_dayssince2000'&&e.blockId!='sensing_distanceto'&&e.blockId!='sensing_keypressed'&&e.blockId!='looks_goforwardbackwardlayers'&&e.blockId!='looks_gotofrontback'&&e.blockId!='looks_hide'&&e.blockId!='looks_nextbackdrop'&&e.blockId!='looks_nextcostume'&&e.blockId!='looks_say'&&e.blockId!='looks_sayforsecs'&&e.blockId!='undefined_sound_playuntildone'&&e.blockId!='undefined_volume'&&e.blockId!='wait_until'&&e.blockId!='operator_and'&&e.blockId!='sound_stopallsounds'&&e.blockId!='timer'&&e.blockId!='undefined_sound_play'&&e.blockId!='motion_setx'&&e.blockId!='motion_sety'&&e.blockId!='control_delete_this_clone'&&e.blockId!='control_if'&&e.blockId!='control_if_else'&&e.blockId!='control_repeat'&&e.blockId!=='sound_playuntildone'&&e.blockId!=='sound_play'&&e.blockId!=='volume'&&e.blockId!=='my variable'&&e.blockId!=='data_hidevariable'&&e.blockId!='answer'&&e.blockId!='askandwait'&&e.blockId!='backdropnumbername'&&e.blockId!='control_create_clone_of'&&e.blockId!='motion_movesteps'&&e.blockId!='looks_seteffectto'&&e.blockId!='looks_setsizeto'&&e.blockId!='looks_show'&&e.blockId!='looks_switchbackdropto'&&e.blockId!='looks_switchbackdroptoandwait'&&e.blockId!='looks_thinkforsecs'&&e.blockId!='looks_think'&&e.blockId!='loudness'&&e.blockId!='motion_changexby'&&e.blockId!='motion_changeyby'&&e.blockId!='motion_glidesecstoxy'&&e.blockId!='motion_glideto'&&e.blockId!='motion_goto'&&e.blockId!='motion_gotoxy'&&e.blockId!='motion_ifonedgebounce'){
+                var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+                db3.transaction(
+                    function (transact3) {
+                        numup3();
+                        console.log(e);
+                        transact3.executeSql("INSERT INTO Unnecessary_TABLE VALUES ( ?,?,?)", [num3,e.blockId,e.workspaceId],
+                        );
+                    }
+                    );
                 };
             };
-        };
-    };
+            };
             break;
         }
         case 'change':
@@ -551,101 +432,7 @@ class Blocks {
                 this.runtime.quietGlow(e.blockId);
             }
             this.deleteBlock(e.blockId);
-            console.log('delete');
-            if(e.newParentId==undefined){
-                e.newParentId=null;
-            };
-            if(e.oldParentId==undefined){
-                e.oldParentId=null;
-            };
-            const move2='delete';
-            if(e.blockId.indexOf('pen')==-1&&e.blockId.indexOf('procedures')==-1&&e.blockId.indexOf('music')==-1){
-            if(e.blockId.indexOf('xposition')==-1&&e.blockId.indexOf('yposition')==-1&&e.blockId.indexOf('direction')==-1){
-                if(e.blockId.indexOf('switchcostumeto')==-1&&e.blockId.indexOf('costumenumbername')==-1&&e.blockId.indexOf('size')==-1){
-                    if(e.blockId.indexOf('sound_playuntildone')==-1&&e.blockId.indexOf('sound_play')==-1&&e.blockId.indexOf('volume')==-1){
-                        if(e.blockId.indexOf('my variable')==-1&&e.blockId.indexOf('data_hidevariable')==-1){
-            if(e.blockId!='answer'&&e.blockId!='askandwait'&&e.blockId!='backdropnumbername'&&e.blockId!='control_create_clone_of'){
-                if(e.blockId!='control_delete_this_clone'&&e.blockId!='control_if'&&e.blockId!='control_if_else'&&e.blockId!='control_repeat'){
-                    if(e.blockId!='control_start_as_clone'&&e.blockId!='control_stop'&&e.blockId!='control_wait'&&e.blockId!='current'){
-                        if(e.blockId!='data_changevariableby'&&e.blockId!='data_setvariableto'&&e.blockId!='data_showvariable'&&e.blockId!='event_broadcast'){
-                            if(e.blockId!='event_broadcastandwait'&&e.blockId!='event_whenbackdropswitchesto'&&e.blockId!='event_whenbroadcastreceived'){
-                                if(e.blockId!='event_whenflagclicked'&&e.blockId!='event_whengreaterthan'&&e.blockId!='event_whenkeypressed'){
-                                    if(e.blockId!='event_whenstageclicked'&&e.blockId!='event_whenthisspriteclicked'&&e.blockId!='forever'){
-                                        if(e.blockId!='looks_changeeffectby'&&e.blockId!='looks_changesizeby'&&e.blockId!='looks_cleargraphiceffects'){
-                                            if(e.blockId!='looks_goforwardbackwardlayers'&&e.blockId!='looks_gotofrontback'&&e.blockId!='looks_hide'){
-                                                if(e.blockId!='looks_nextbackdrop'&&e.blockId!='looks_nextcostume'&&e.blockId!='looks_say'&&e.blockId!='looks_sayforsecs'){
-                                                    if(e.blockId!='looks_seteffectto'&&e.blockId!='looks_setsizeto'&&e.blockId!='looks_show'&&e.blockId!='looks_switchbackdropto'){
-                                                        if(e.blockId!='looks_switchbackdroptoandwait'&&e.blockId!='looks_thinkforsecs'&&e.blockId!='looks_think'){
-                                                            if(e.blockId!='loudness'&&e.blockId!='motion_changexby'&&e.blockId!='motion_changeyby'&&e.blockId!='motion_glidesecstoxy'){
-                                                                if(e.blockId!='motion_glideto'&&e.blockId!='motion_goto'&&e.blockId!='motion_gotoxy'&&e.blockId!='motion_ifonedgebounce'){
-                                                                    if(e.blockId!='motion_movesteps'&&e.blockId!='motion_pointindirection'&&e.blockId!='motion_pointtowards'){
-                                                                        if(e.blockId!='motion_setrotationstyle'&&e.blockId!='motion_setx'&&e.blockId!='motion_sety'){
-                                                                            if(e.blockId!='motion_turnleft'&&e.blockId!='motion_turnright'&&e.blockId!='of'&&e.blockId!='operator_add'){
-                                                                                if(e.blockId!='operator_contains'&&e.blockId!='operator_divide'&&e.blockId!='operator_equals'){
-                                                                                    if(e.blockId!='operator_gt'&&e.blockId!='operator_join'&&e.blockId!='operator_length'){
-                                                                                        if(e.blockId!='operator_letter_of'&&e.blockId!='operator_lt'&&e.blockId!='operator_mathop'){
-                                                                                            if(e.blockId!='operator_mod'&&e.blockId!='operator_multiply'&&e.blockId!='operator_not'){
-                                                                                                if(e.blockId!='operator_or'&&e.blockId!='operator_random'&&e.blockId!='operator_round'){
-                                                                                                    if(e.blockId!='operator_subtract'&&e.blockId!='repeat_until'&&e.blockId!='sensing_coloristouchingcolor'){
-                                                                                                        if(e.blockId!='sensing_dayssince2000'&&e.blockId!='sensing_distanceto'&&e.blockId!='sensing_keypressed'){
-                                                                                                            if(e.blockId!='sensing_mousedown'&&e.blockId!='sensing_mousex'&&e.blockId!='sensing_mousey'&&e.blockId!='sensing_resettimer'){
-                                                                                                                if(e.blockId!='sensing_setdragmode'&&e.blockId!='sensing_touchingcolor'&&e.blockId!='sensing_touchingobject'){
-                                                                                                                    if(e.blockId!='sensing_username'&&e.blockId!='sound_changeeffectby'&&e.blockId!='sound_changevolumeby'){
-                                                                                                                        if(e.blockId!='sound_cleareffects'&&e.blockId!='sound_seteffectto'&&e.blockId!='sound_setvolumeto'){
-                                                                                                                            if(e.blockId!='sound_stopallsounds'&&e.blockId!='timer'&&e.blockId!='undefined_sound_play'){
-                                                                                                                                if(e.blockId!='undefined_sound_playuntildone'&&e.blockId!='undefined_volume'&&e.blockId!='wait_until'&&e.blockId!='operator_and'){
-                                                                                                                                    var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-                                                                                                                                    db3.transaction(
-                                                                                                                                        function (transact3) {
-                                                                                                                                            numup3();
-                                                                                                                                            transact3.executeSql("INSERT INTO move_research VALUES ( ?,?,?,?,?,?,?,? )", [num3,null1,e.blockId,e.newParentId,e.oldParentId,timesnm,e.workspaceId,move2],
-                                                                                                                                            );
-                                                                                                                                        }
-                                                                                                                                    );
-                                                                                                                                    db3.transaction(
-                                                                                                                                        function (transact3) {
-                                                                                                                                            numup4();
-                                                                                                                                            const count1 =1;
-                                                                                                                                            transact3.executeSql("INSERT INTO movecount_research VALUES ( ?,?,?,?,?,? )", [num4,null1,e.blockId,move2,count1,timesnm],
-                                                                                                                                            );
-                                                                                                                                        }
-                                                                                                                                    );
-                                                                                                                                };
-                                                                                                                            };
-                                                                                                                        };
-                                                                                                                    };
-                                                                                                                    };
-                                                                                                                };
-                                                                                                            };
-                                                                                                        };
-                                                                                                                };
-                                                                                                            };
-                                                                                                        };
-                                                                                                    };
-                                                                                                };
-                                                                                            };
-                                                                                        };
-                                                                                    };
-                                                                                };
-                                                                            };
-                                                                        };
-                                                                    ;
-                                                                };
-                                                            };
-                                                        };
-                                                    };
-                                                };
-                                            };
-                                        };
-                                    };
-                                };
-                            };
-                        };
-                    };
-                };
-            };
-        };
-        };
+
             break;
         case 'move':
             this.moveBlock({
@@ -656,102 +443,6 @@ class Blocks {
                 newInput: e.newInputName,
                 newCoordinate: e.newCoordinate
             });
-            console.log('move');
-            if(e.newParentId==undefined){
-                e.newParentId=null;
-            };
-            if(e.oldParentId==undefined){
-                e.oldParentId=null;
-            };
-            const move='move';
-            if(e.blockId.indexOf('pen')==-1&&e.blockId.indexOf('procedures')==-1&&e.blockId.indexOf('music')==-1){
-            if(e.blockId.indexOf('xposition')==-1&&e.blockId.indexOf('yposition')==-1&&e.blockId.indexOf('direction')==-1){
-                if(e.blockId.indexOf('switchcostumeto')==-1&&e.blockId.indexOf('costumenumbername')==-1&&e.blockId.indexOf('size')==-1){
-                    if(e.blockId.indexOf('sound_playuntildone')==-1&&e.blockId.indexOf('sound_play')==-1&&e.blockId.indexOf('volume')==-1){
-                        if(e.blockId.indexOf('my variable')==-1&&e.blockId.indexOf('data_hidevariable')==-1){
-            if(e.blockId!='answer'&&e.blockId!='askandwait'&&e.blockId!='backdropnumbername'&&e.blockId!='control_create_clone_of'){
-                if(e.blockId!='control_delete_this_clone'&&e.blockId!='control_if'&&e.blockId!='control_if_else'&&e.blockId!='control_repeat'){
-                    if(e.blockId!='control_start_as_clone'&&e.blockId!='control_stop'&&e.blockId!='control_wait'&&e.blockId!='current'){
-                        if(e.blockId!='data_changevariableby'&&e.blockId!='data_setvariableto'&&e.blockId!='data_showvariable'&&e.blockId!='event_broadcast'){
-                            if(e.blockId!='event_broadcastandwait'&&e.blockId!='event_whenbackdropswitchesto'&&e.blockId!='event_whenbroadcastreceived'){
-                                if(e.blockId!='event_whenflagclicked'&&e.blockId!='event_whengreaterthan'&&e.blockId!='event_whenkeypressed'){
-                                    if(e.blockId!='event_whenstageclicked'&&e.blockId!='event_whenthisspriteclicked'&&e.blockId!='forever'){
-                                        if(e.blockId!='looks_changeeffectby'&&e.blockId!='looks_changesizeby'&&e.blockId!='looks_cleargraphiceffects'){
-                                            if(e.blockId!='looks_goforwardbackwardlayers'&&e.blockId!='looks_gotofrontback'&&e.blockId!='looks_hide'){
-                                                if(e.blockId!='looks_nextbackdrop'&&e.blockId!='looks_nextcostume'&&e.blockId!='looks_say'&&e.blockId!='looks_sayforsecs'){
-                                                    if(e.blockId!='looks_seteffectto'&&e.blockId!='looks_setsizeto'&&e.blockId!='looks_show'&&e.blockId!='looks_switchbackdropto'){
-                                                        if(e.blockId!='looks_switchbackdroptoandwait'&&e.blockId!='looks_thinkforsecs'&&e.blockId!='looks_think'){
-                                                            if(e.blockId!='loudness'&&e.blockId!='motion_changexby'&&e.blockId!='motion_changeyby'&&e.blockId!='motion_glidesecstoxy'){
-                                                                if(e.blockId!='motion_glideto'&&e.blockId!='motion_goto'&&e.blockId!='motion_gotoxy'&&e.blockId!='motion_ifonedgebounce'){
-                                                                    if(e.blockId!='motion_movesteps'&&e.blockId!='motion_pointindirection'&&e.blockId!='motion_pointtowards'){
-                                                                        if(e.blockId!='motion_setrotationstyle'&&e.blockId!='motion_setx'&&e.blockId!='motion_sety'){
-                                                                            if(e.blockId!='motion_turnleft'&&e.blockId!='motion_turnright'&&e.blockId!='of'&&e.blockId!='operator_add'){
-                                                                                if(e.blockId!='operator_contains'&&e.blockId!='operator_divide'&&e.blockId!='operator_equals'){
-                                                                                    if(e.blockId!='operator_gt'&&e.blockId!='operator_join'&&e.blockId!='operator_length'){
-                                                                                        if(e.blockId!='operator_letter_of'&&e.blockId!='operator_lt'&&e.blockId!='operator_mathop'){
-                                                                                            if(e.blockId!='operator_mod'&&e.blockId!='operator_multiply'&&e.blockId!='operator_not'){
-                                                                                                if(e.blockId!='operator_or'&&e.blockId!='operator_random'&&e.blockId!='operator_round'){
-                                                                                                    if(e.blockId!='operator_subtract'&&e.blockId!='repeat_until'&&e.blockId!='sensing_coloristouchingcolor'){
-                                                                                                        if(e.blockId!='sensing_dayssince2000'&&e.blockId!='sensing_distanceto'&&e.blockId!='sensing_keypressed'){
-                                                                                                            if(e.blockId!='sensing_mousedown'&&e.blockId!='sensing_mousex'&&e.blockId!='sensing_mousey'&&e.blockId!='sensing_resettimer'){
-                                                                                                                if(e.blockId!='sensing_setdragmode'&&e.blockId!='sensing_touchingcolor'&&e.blockId!='sensing_touchingobject'){
-                                                                                                                    if(e.blockId!='sensing_username'&&e.blockId!='sound_changeeffectby'&&e.blockId!='sound_changevolumeby'){
-                                                                                                                        if(e.blockId!='sound_cleareffects'&&e.blockId!='sound_seteffectto'&&e.blockId!='sound_setvolumeto'){
-                                                                                                                            if(e.blockId!='sound_stopallsounds'&&e.blockId!='timer'&&e.blockId!='undefined_sound_play'){
-                                                                                                                                if(e.blockId!='undefined_sound_playuntildone'&&e.blockId!='undefined_volume'&&e.blockId!='wait_until'&&e.blockId!='operator_and'){
-                                                                                                                                    var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-                                                                                                                                    db3.transaction(
-                                                                                                                                        function (transact3) {
-                                                                                                                                            numup3();
-                                                                                                                                            transact3.executeSql("INSERT INTO move_research VALUES ( ?,?,?,?,?,?,?,? )", [num3,null1,e.blockId,e.newParentId,e.oldParentId,timesnm,e.workspaceId,move],
-                                                                                                                                            );
-                                                                                                                                        }
-                                                                                                                                    );
-                                                                                                                                    db3.transaction(
-                                                                                                                                        function (transact3) {
-                                                                                                                                            numup4();
-                                                                                                                                            const count1 =1;
-                                                                                                                                            transact3.executeSql("INSERT INTO movecount_research VALUES ( ?,?,?,?,?,? )", [num4,null1,e.blockId,move,count1,timesnm],
-                                                                                                                                            );
-                                                                                                                                        }
-                                                                                                                                    );
-                                                                                                                                };
-                                                                                                                            };
-                                                                                                                        };
-                                                                                                                    };
-                                                                                                                    };
-                                                                                                                };
-                                                                                                            };
-                                                                                                        };
-                                                                                                                };
-                                                                                                            };
-                                                                                                        };
-                                                                                                    };
-                                                                                                };
-                                                                                            };
-                                                                                        };
-                                                                                    };
-                                                                                };
-                                                                            };
-                                                                        };
-                                                                    ;
-                                                                };
-                                                            };
-                                                        };
-                                                    };
-                                                };
-                                            };
-                                        };
-                                    };
-                                };
-                            };
-                        };
-                    };
-                };
-            };
-        };
-    };
-
 
             break;
         case 'dragOutside':
@@ -796,7 +487,6 @@ class Blocks {
                 stage.createVariable(e.varId, e.varName, e.varType, e.isCloud);
                 this.emitProjectChanged();
             }
-            console.log('var_create');
             break;
         case 'var_rename':
             if (editingTarget && editingTarget.variables.hasOwnProperty(e.varId)) {
@@ -816,14 +506,12 @@ class Blocks {
                 }
             }
             this.emitProjectChanged();
-            console.log('var_rename');
             break;
         case 'var_delete': {
             const target = (editingTarget && editingTarget.variables.hasOwnProperty(e.varId)) ?
                 editingTarget : stage;
             target.deleteVariable(e.varId);
             this.emitProjectChanged();
-            console.log('var_delete');
             break;
         }
         case 'comment_create':
@@ -845,7 +533,6 @@ class Blocks {
                 }
             }
             this.emitProjectChanged();
-            console.log('comment_create');
             break;
         case 'comment_change':
             if (this.runtime.getEditingTarget()) {
@@ -868,7 +555,6 @@ class Blocks {
                 }
                 this.emitProjectChanged();
             }
-            console.log('comment_change');
             break;
         case 'comment_move':
             if (this.runtime.getEditingTarget()) {
@@ -884,7 +570,6 @@ class Blocks {
 
                 this.emitProjectChanged();
             }
-            console.log('comment_change');
             break;
         case 'comment_delete':
             if (this.runtime.getEditingTarget()) {
@@ -908,7 +593,6 @@ class Blocks {
 
                 this.emitProjectChanged();
             }
-            console.log('comment_delete');
             break;
         }
     }
@@ -955,13 +639,63 @@ class Blocks {
         if (block.topLevel) {
             this._addScript(block.id);
         }
+        //日付オブジェクトを作成する
+        var dd2 = new Date();
+        //「年」を取得する
+        var yy = dd2.getFullYear();
+        //「月」を所得する
+        var month = dd2.getMonth();
+        //「日」を取得する
+        var day = dd2.getDate();
+        //「時」を取得する
+        var hh = dd2.getHours();
+        //「分」を取得する
+        var mm = dd2.getMinutes();
+        //「秒」を取得する
+        var ss = dd2.getSeconds();
+        //「ミリ秒」を取得する
+        var ms = dd2.getMilliseconds();
+        if (yy < 10) {
+            yy = "0" + yy;
+        }
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+        if (hh < 10) {
+            hh = "0" + hh;
+        }
+        if (mm < 10) {
+            mm = "0" + mm;
+        }
+        if (ss < 10) {
+            ss = "0" + ss;
+        }
+        const timesnm2 = yy+'-'+month+'-'+day+' '+hh+':'+mm+':'+ss+':'+ms;
+        //起動時の名称登録の除外
+        if(block.opcode.indexOf('math_number')==-1&&block.opcode.indexOf('text')==-1&&block.id.indexOf('pen')==-1&&block.id.indexOf('procedures')==-1&&block.id.indexOf('music')==-1&&block.id.indexOf('yposition')==-1&&block.id.indexOf('direction')==-1&&block.id!='event_whenflagclicked'&&block.id!='event_whengreaterthan'&&block.id!='event_whenkeypressed'&&block.id!='operator_gt'&&block.id!='operator_join'&&block.id!='operator_length'&&block.id!='operator_letter_of'&&block.id!='operator_lt'&&block.id!='operator_mathop'&&block.id!='motion_pointtowards'&&block.id!='sensing_setdragmode'&&block.id!='sensing_touchingcolor'&&block.id!='sensing_touchingobject'&&block.id!='sensing_mousedown'&&block.id!='sensing_mousex'&&block.id!='sensing_mousey'&&block.id!='sensing_resettimer'&&block.id!='control_start_as_clone'&&block.id!='control_stop'&&block.id!='control_wait'&&block.id!='current'&&block.id!='data_changevariableby'&&block.id!='data_setvariableto'&&block.id!='data_showvariable'&&block.id!='event_broadcast'&&block.id!='operator_or'&&block.id!='operator_random'&&block.id!='operator_round'&&block.id!='operator_mod'&&block.id!='operator_multiply'&&block.id!='operator_not'&&block.id!='motion_pointindirection'&&block.id!='event_whenstageclicked'&&block.id!='event_whenthisspriteclicked'&&block.id!='forever'&&block.id!='looks_changeeffectby'&&block.id!='looks_changesizeby'&&block.id!='looks_cleargraphiceffects'&&block.id!='sensing_username'&&block.id!='sound_changeeffectby'&&block.id!='sound_changevolumeby'&&block.id!='sound_cleareffects'&&block.id!='sound_seteffectto'&&block.id!='sound_setvolumeto'&&block.id!='motion_setrotationstyle'){
+            if(block.id.indexOf('xposition')==-1&&block.id.indexOf('switchcostumeto')==-1&&block.id.indexOf('costumenumbername')==-1&&block.id.indexOf('size')==-1&&block.id!='event_broadcastandwait'&&block.id!='event_whenbackdropswitchesto'&&block.id!='event_whenbroadcastreceived'&&block.id!='motion_turnleft'&&block.id!='motion_turnright'&&block.id!='of'&&block.id!='operator_add'&&block.id!='operator_contains'&&block.id!='operator_divide'&&block.id!='operator_equals'&&block.id!='operator_subtract'&&block.id!='repeat_until'&&block.id!='sensing_coloristouchingcolor'&&block.id!='sensing_dayssince2000'&&block.id!='sensing_distanceto'&&block.id!='sensing_keypressed'&&block.id!='looks_goforwardbackwardlayers'&&block.id!='looks_gotofrontback'&&block.id!='looks_hide'&&block.id!='looks_nextbackdrop'&&block.id!='looks_nextcostume'&&block.id!='looks_say'&&block.id!='looks_sayforsecs'&&block.id!='undefined_sound_playuntildone'&&block.id!='undefined_volume'&&block.id!='wait_until'&&block.id!='operator_and'&&block.id!='sound_stopallsounds'&&block.id!='timer'&&block.id!='undefined_sound_play'&&block.id!='motion_setx'&&block.id!='motion_sety'&&block.id!='control_delete_this_clone'&&block.id!='control_if'&&block.id!='control_if_else'&&block.id!='control_repeat'&&block.id.indexOf('sound_playuntildone')==-1&&block.id.indexOf('sound_play')==-1&&block.id.indexOf('volume')==-1&&block.id.indexOf('my variable')==-1&&block.id.indexOf('data_hidevariable')==-1&&block.id!='answer'&&block.id!='askandwait'&&block.id!='backdropnumbername'&&block.id!='control_create_clone_of'&&block.id!='motion_movesteps'&&block.id!='looks_seteffectto'&&block.id!='looks_setsizeto'&&block.id!='looks_show'&&block.id!='looks_switchbackdropto'&&block.id!='looks_switchbackdroptoandwait'&&block.id!='looks_thinkforsecs'&&block.id!='looks_think'&&block.id!='loudness'&&block.id!='motion_changexby'&&block.id!='motion_changeyby'&&block.id!='motion_glidesecstoxy'&&block.id!='motion_glideto'&&block.id!='motion_goto'&&block.id!='motion_gotoxy'&&block.id!='motion_ifonedgebounce'){
+                //DB登録
+                var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+                db3.transaction(
+                    function (transact3) {
+                        if(block.parent==null){
+                            numup4();
+                            transact3.executeSql("INSERT INTO Editing_Table VALUES ( ?,?,?,?,?,?,?,? )", [num4,block.opcode,block.id,block.parent,null,null,timesnm2,'create'],
+                        );
+                        }
+                    }
+                )
+            };
+        };
 
         this.resetCache();
 
         // A new block was actually added to the block container,
         // emit a project changed event
         this.emitProjectChanged();
-        console.log('createblock');
     }
 
     /**
@@ -1110,7 +844,6 @@ class Blocks {
         // ignoring changes like routine re-positioning
         // of a block when loading a workspace
         let didChange = false;
-
         // Move coordinate changes.
         if (e.newCoordinate) {
 
@@ -1120,6 +853,62 @@ class Blocks {
             block.y = e.newCoordinate.y;
         }
 
+        //日付オブジェクトを作成する
+        var dd2 = new Date();
+        //「年」を取得する
+        var yy = dd2.getFullYear();
+        //「月」を所得する
+        var month = dd2.getMonth();
+        //「日」を取得する
+        var day = dd2.getDate();
+        //「時」を取得する
+        var hh = dd2.getHours();
+        //「分」を取得する
+        var mm = dd2.getMinutes();
+        //「秒」を取得する
+        var ss = dd2.getSeconds();
+        //「ミリ秒」を取得する
+        var ms = dd2.getMilliseconds();
+        if (yy < 10) {
+            yy = "0" + yy;
+        }
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+        if (hh < 10) {
+            hh = "0" + hh;
+        }
+        if (mm < 10) {
+            mm = "0" + mm;
+        }
+        if (ss < 10) {
+            ss = "0" + ss;
+        }
+        const timesnm2 = yy+'-'+month+'-'+day+' '+hh+':'+mm+':'+ss+':'+ms;
+        //起動時の名称登録の除外
+        if(block.opcode.indexOf('text')==-1&&block.id.indexOf('pen')==-1&&block.id.indexOf('procedures')==-1&&block.id.indexOf('music')==-1&&block.id.indexOf('yposition')==-1&&block.id.indexOf('direction')==-1&&block.id!='event_whenflagclicked'&&block.id!='event_whengreaterthan'&&block.id!='event_whenkeypressed'&&block.id!='operator_gt'&&block.id!='operator_join'&&block.id!='operator_length'&&block.id!='operator_letter_of'&&block.id!='operator_lt'&&block.id!='operator_mathop'&&block.id!='motion_pointtowards'&&block.id!='sensing_setdragmode'&&block.id!='sensing_touchingcolor'&&block.id!='sensing_touchingobject'&&block.id!='sensing_mousedown'&&block.id!='sensing_mousex'&&block.id!='sensing_mousey'&&block.id!='sensing_resettimer'&&block.id!='control_start_as_clone'&&block.id!='control_stop'&&block.id!='control_wait'&&block.id!='current'&&block.id!='data_changevariableby'&&block.id!='data_setvariableto'&&block.id!='data_showvariable'&&block.id!='event_broadcast'&&block.id!='operator_or'&&block.id!='operator_random'&&block.id!='operator_round'&&block.id!='operator_mod'&&block.id!='operator_multiply'&&block.id!='operator_not'&&block.id!='motion_pointindirection'&&block.id!='event_whenstageclicked'&&block.id!='event_whenthisspriteclicked'&&block.id!='forever'&&block.id!='looks_changeeffectby'&&block.id!='looks_changesizeby'&&block.id!='looks_cleargraphiceffects'&&block.id!='sensing_username'&&block.id!='sound_changeeffectby'&&block.id!='sound_changevolumeby'&&block.id!='sound_cleareffects'&&block.id!='sound_seteffectto'&&block.id!='sound_setvolumeto'&&block.id!='motion_setrotationstyle'){
+            if(block.id.indexOf('xposition')==-1&&block.id.indexOf('switchcostumeto')==-1&&block.id.indexOf('costumenumbername')==-1&&block.id.indexOf('size')==-1&&block.id!='event_broadcastandwait'&&block.id!='event_whenbackdropswitchesto'&&block.id!='event_whenbroadcastreceived'&&block.id!='motion_turnleft'&&block.id!='motion_turnright'&&block.id!='of'&&block.id!='operator_add'&&block.id!='operator_contains'&&block.id!='operator_divide'&&block.id!='operator_equals'&&block.id!='operator_subtract'&&block.id!='repeat_until'&&block.id!='sensing_coloristouchingcolor'&&block.id!='sensing_dayssince2000'&&block.id!='sensing_distanceto'&&block.id!='sensing_keypressed'&&block.id!='looks_goforwardbackwardlayers'&&block.id!='looks_gotofrontback'&&block.id!='looks_hide'&&block.id!='looks_nextbackdrop'&&block.id!='looks_nextcostume'&&block.id!='looks_say'&&block.id!='looks_sayforsecs'&&block.id!='undefined_sound_playuntildone'&&block.id!='undefined_volume'&&block.id!='wait_until'&&block.id!='operator_and'&&block.id!='sound_stopallsounds'&&block.id!='timer'&&block.id!='undefined_sound_play'&&block.id!='motion_setx'&&block.id!='motion_sety'&&block.id!='control_delete_this_clone'&&block.id!='control_if'&&block.id!='control_if_else'&&block.id!='control_repeat'&&block.id.indexOf('sound_playuntildone')==-1&&block.id.indexOf('sound_play')==-1&&block.id.indexOf('volume')==-1&&block.id.indexOf('my variable')==-1&&block.id.indexOf('data_hidevariable')==-1&&block.id!='answer'&&block.id!='askandwait'&&block.id!='backdropnumbername'&&block.id!='control_create_clone_of'&&block.id!='motion_movesteps'&&block.id!='looks_seteffectto'&&block.id!='looks_setsizeto'&&block.id!='looks_show'&&block.id!='looks_switchbackdropto'&&block.id!='looks_switchbackdroptoandwait'&&block.id!='looks_thinkforsecs'&&block.id!='looks_think'&&block.id!='loudness'&&block.id!='motion_changexby'&&block.id!='motion_changeyby'&&block.id!='motion_glidesecstoxy'&&block.id!='motion_glideto'&&block.id!='motion_goto'&&block.id!='motion_gotoxy'&&block.id!='motion_ifonedgebounce'){
+                //DB登録
+                var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+                db3.transaction(
+                    function (transact3) {
+                        numup4();
+                        if(e.oldParent==undefined){
+                            transact3.executeSql("INSERT INTO Editing_Table VALUES ( ?,?,?,?,?,?,?,? )", [num4,block.opcode,block.id,block.parent,null,null,timesnm2,'move'],
+                        );
+                        }else{
+                            transact3.executeSql("INSERT INTO Editing_Table VALUES ( ?,?,?,?,?,?,?,? )", [num4,block.opcode,block.id,block.parent,e.oldParent,null,timesnm2,'move'],
+                        );
+                        };
+                        //transact3.executeSql("INSERT INTO Unnecessary_TABLE VALUES ( ?,?,?,?,?,?,?,? )", [num4,block.opcode,block.id,null,null,null,null,null],
+                        //);
+                    }
+                )
+            };
+        };
         // Remove from any old parent.
         if (typeof e.oldParent !== 'undefined') {
             const oldParent = this._blocks[e.oldParent];
@@ -1203,7 +992,6 @@ class Blocks {
      * @param {!string} blockId Id of block to delete
      */
     deleteBlock (blockId) {
-        //console.log("deleteBlock");
         // @todo In runtime, stop threads running on this script.
 
         // Get block
@@ -1212,6 +1000,57 @@ class Blocks {
             // No block with the given ID exists
             return;
         }
+        //日付オブジェクトを作成する
+        var dd2 = new Date();
+        //「年」を取得する
+        var yy = dd2.getFullYear();
+        //「月」を所得する
+        var month = dd2.getMonth();
+        //「日」を取得する
+        var day = dd2.getDate();
+        //「時」を取得する
+        var hh = dd2.getHours();
+        //「分」を取得する
+        var mm = dd2.getMinutes();
+        //「秒」を取得する
+        var ss = dd2.getSeconds();
+        //「ミリ秒」を取得する
+        var ms = dd2.getMilliseconds();
+        if (yy < 10) {
+            yy = "0" + yy;
+        }
+        if (month < 10) {
+            month = "0" + month;
+        }
+        if (day < 10) {
+            day = "0" + day;
+        }
+        if (hh < 10) {
+            hh = "0" + hh;
+        }
+        if (mm < 10) {
+            mm = "0" + mm;
+        }
+        if (ss < 10) {
+            ss = "0" + ss;
+        }
+        const timesnm2 = yy+'-'+month+'-'+day+' '+hh+':'+mm+':'+ss+':'+ms;
+        //起動時の名称登録の除外
+        if(block.opcode.indexOf('math_number')==-1&&block.opcode.indexOf('text')==-1&&block.id.indexOf('pen')==-1&&block.id.indexOf('procedures')==-1&&block.id.indexOf('music')==-1&&block.id.indexOf('yposition')==-1&&block.id.indexOf('direction')==-1&&block.id!='event_whenflagclicked'&&block.id!='event_whengreaterthan'&&block.id!='event_whenkeypressed'&&block.id!='operator_gt'&&block.id!='operator_join'&&block.id!='operator_length'&&block.id!='operator_letter_of'&&block.id!='operator_lt'&&block.id!='operator_mathop'&&block.id!='motion_pointtowards'&&block.id!='sensing_setdragmode'&&block.id!='sensing_touchingcolor'&&block.id!='sensing_touchingobject'&&block.id!='sensing_mousedown'&&block.id!='sensing_mousex'&&block.id!='sensing_mousey'&&block.id!='sensing_resettimer'&&block.id!='control_start_as_clone'&&block.id!='control_stop'&&block.id!='control_wait'&&block.id!='current'&&block.id!='data_changevariableby'&&block.id!='data_setvariableto'&&block.id!='data_showvariable'&&block.id!='event_broadcast'&&block.id!='operator_or'&&block.id!='operator_random'&&block.id!='operator_round'&&block.id!='operator_mod'&&block.id!='operator_multiply'&&block.id!='operator_not'&&block.id!='motion_pointindirection'&&block.id!='event_whenstageclicked'&&block.id!='event_whenthisspriteclicked'&&block.id!='forever'&&block.id!='looks_changeeffectby'&&block.id!='looks_changesizeby'&&block.id!='looks_cleargraphiceffects'&&block.id!='sensing_username'&&block.id!='sound_changeeffectby'&&block.id!='sound_changevolumeby'&&block.id!='sound_cleareffects'&&block.id!='sound_seteffectto'&&block.id!='sound_setvolumeto'&&block.id!='motion_setrotationstyle'){
+            if(block.id.indexOf('xposition')==-1&&block.id.indexOf('switchcostumeto')==-1&&block.id.indexOf('costumenumbername')==-1&&block.id.indexOf('size')==-1&&block.id!='event_broadcastandwait'&&block.id!='event_whenbackdropswitchesto'&&block.id!='event_whenbroadcastreceived'&&block.id!='motion_turnleft'&&block.id!='motion_turnright'&&block.id!='of'&&block.id!='operator_add'&&block.id!='operator_contains'&&block.id!='operator_divide'&&block.id!='operator_equals'&&block.id!='operator_subtract'&&block.id!='repeat_until'&&block.id!='sensing_coloristouchingcolor'&&block.id!='sensing_dayssince2000'&&block.id!='sensing_distanceto'&&block.id!='sensing_keypressed'&&block.id!='looks_goforwardbackwardlayers'&&block.id!='looks_gotofrontback'&&block.id!='looks_hide'&&block.id!='looks_nextbackdrop'&&block.id!='looks_nextcostume'&&block.id!='looks_say'&&block.id!='looks_sayforsecs'&&block.id!='undefined_sound_playuntildone'&&block.id!='undefined_volume'&&block.id!='wait_until'&&block.id!='operator_and'&&block.id!='sound_stopallsounds'&&block.id!='timer'&&block.id!='undefined_sound_play'&&block.id!='motion_setx'&&block.id!='motion_sety'&&block.id!='control_delete_this_clone'&&block.id!='control_if'&&block.id!='control_if_else'&&block.id!='control_repeat'&&block.id.indexOf('sound_playuntildone')==-1&&block.id.indexOf('sound_play')==-1&&block.id.indexOf('volume')==-1&&block.id.indexOf('my variable')==-1&&block.id.indexOf('data_hidevariable')==-1&&block.id!='answer'&&block.id!='askandwait'&&block.id!='backdropnumbername'&&block.id!='control_create_clone_of'&&block.id!='motion_movesteps'&&block.id!='looks_seteffectto'&&block.id!='looks_setsizeto'&&block.id!='looks_show'&&block.id!='looks_switchbackdropto'&&block.id!='looks_switchbackdroptoandwait'&&block.id!='looks_thinkforsecs'&&block.id!='looks_think'&&block.id!='loudness'&&block.id!='motion_changexby'&&block.id!='motion_changeyby'&&block.id!='motion_glidesecstoxy'&&block.id!='motion_glideto'&&block.id!='motion_goto'&&block.id!='motion_gotoxy'&&block.id!='motion_ifonedgebounce'){
+                //DB登録
+                var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+                db3.transaction(
+                    function (transact3) {
+                        if(block.parent==null){
+                            numup4();
+                            transact3.executeSql("INSERT INTO Editing_Table VALUES ( ?,?,?,?,?,?,?,? )", [num4,block.opcode,block.id,block.parent,null,null,timesnm2,'delete'],
+                        );
+                        }
+                    }
+                )
+            };
+        };
 
         // Delete children
         if (block.next !== null) {
@@ -1649,7 +1488,6 @@ BlocksExecuteCache.getCached = function (blocks, blockId, CacheType) {
     }
 
     const block = blocks.getBlock(blockId);
-    console.log(blocks.getOpcode(block));
     if (typeof block === 'undefined') return null;
 
     if (typeof CacheType === 'undefined') {

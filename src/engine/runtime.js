@@ -342,7 +342,6 @@ class Runtime extends EventEmitter {
             setTimeout(countUp, 1000);
             this.dbcreate();
             this.dbcount();
-            this.dbcheck();
         }
         countUp();
 
@@ -2044,13 +2043,6 @@ class Runtime extends EventEmitter {
         for (let i = 0; i < this.targets.length; i++) {
             this.targets[i].onGreenFlag();
         }
-        console.log('種類：イベント：緑の旗が押されたとき');
-        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db.transaction(function (transact) {
-        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','events','GreenFlagの開始'],
-          );
-      }
-          )
         this.startHats('event_whenflagclicked');
     }
 
@@ -2668,95 +2660,29 @@ class Runtime extends EventEmitter {
     dbcreate(){
         var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
         db3.transaction(function (transact3) {
-            transact3.executeSql("CREATE TABLE Linking_research (num,opcode,id,parent,next,time)", [],
+            transact3.executeSql("CREATE TABLE Running_Table (num,opcode,parent,id,next,time)", [],
               );
+            transact3.executeSql("CREATE TABLE Unnecessary_Table (num,Id,workspaceId)", [],
+            );
+            transact3.executeSql("CREATE TABLE Editing_Table (num,opcode,Id,parent,oldparent,workspaceId,time,type)", [],
+            );
             }
             );
-        db3.transaction(function (transact3) {
-            transact3.executeSql("CREATE TABLE count_research (num,opcode,count)", [],
-              );
-            }
-            );
-        db3.transaction(function (transact3){
-            transact3.executeSql("CREATE TABLE move_research (num,opcode,Id,newParentId,oldParentId,time,workspaceId,type)", [],
-            );
-        }
-        )
-        db3.transaction(function (transacr3){
-            transacr3.executeSql("CREATE TABLE movecount_research (num,opcode,Id,type,count,time)", [],
-            );
-        })
     }
 
     dbcount(){
         var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
         db3.transaction(
-            function (transact3) {
-                transact3.executeSql
-                ('UPDATE count_research AS A SET count = (SELECT SUM(count) FROM count_research where opcode = A.opcode)',
-                    [],//querySuccess, errorDB
-                );
-            }
-        );
-        db3.transaction(
             function (transact) {
-                transact.executeSql
-                ('UPDATE move_research AS move SET opcode = (SELECT opcode FROM Linking_research WHERE id =move.id)',
-                 [],
-                 );
-            }
-        );
-        db3.transaction(
-            function (transact) {
-                transact.executeSql
-                ('UPDATE movecount_research AS movecount SET opcode = (SELECT opcode FROM Linking_research WHERE id =movecount.id)',
-                 [],
-                 );
-            }
-        );
-        //sqlの確認用
-        /*
-        var querySuccess = function(transact3,results){
-            console.log('更新成功');
-        };
-        var errorDB = function(err) {
-            console.log('更新に失敗');
-        };
-        */
-    }
-
-    dbcheck(){
-        var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db3.transaction(
-            function (transact3) {
-                transact3.executeSql
-                ('DELETE FROM Linking_research WHERE num NOT IN ( SELECT num FROM( SELECT * FROM Linking_research as t1 WHERE 1 = (SELECT COUNT(*) FROM Linking_research as t2 WHERE t1.id = t2.id AND t1.time = t2.time AND t1.num <= t2.num)) AS tmp)',
-                 [],
-                 /* sqlの確認のための部分
-                 querySuccess, errorDB
-                 */
-                 );
-            }
-        );
-        db3.transaction(
-            function (transact) {
-                transact.executeSql
-                ('DELETE FROM count_research WHERE num NOT IN ( SELECT num FROM( SELECT * FROM count_research AS c1 WHERE 1 = (SELECT COUNT(*) FROM count_research AS c2 WHERE c1.opcode = c2.opcode AND c1.num >= c2.num))AS tmp2)',
-                 [],//querySuccess, errorDB
-                 );
-            }
-        );
-
-        //sqlの確認用
-        /*
-        var querySuccess = function(transact3,results){
-            console.log('成功');
-        };
-        var errorDB = function(err) {
-            console.log('消去に失敗');
-        };
-        */
-    }
+             transact.executeSql('UPDATE Editing_Table AS move2 SET workspaceId = (SELECT workspaceId FROM Unnecessary_Table WHERE Id =move2.Id)',
+             [],
+             );
+             transact.executeSql('DELETE FROM Running_Table WHERE num NOT IN ( SELECT num FROM( SELECT * FROM Running_Table as t1 WHERE 1 = (SELECT COUNT(*) FROM Running_Table as t2 WHERE t1.id = t2.id AND t1.time = t2.time AND t1.num <= t2.num)) AS tmp)',
+             [],
+             );
+        }
+    );
+            };
 }
 
 /**
