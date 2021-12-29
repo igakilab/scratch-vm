@@ -183,13 +183,6 @@ class Scratch3SoundBlocks {
     }
 
     _addWaitingSound (targetId, soundId) {
-        console.log('種類：音：終わるまで'+soundId+'の音を鳴らす');
-        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db.transaction(function (transact) {
-        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','sound','終わるまで'+soundId+'の音を鳴らす'],
-          );
-      }
-          )
         if (!this.waitingSounds[targetId]) {
             this.waitingSounds[targetId] = new Set();
         }
@@ -197,13 +190,6 @@ class Scratch3SoundBlocks {
     }
 
     _removeWaitingSound (targetId, soundId) {
-        console.count('種類：音'+soundId+'の音を鳴らす');
-        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db.transaction(function (transact) {
-        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','sound',soundId+'の音を鳴らす'],
-          );
-      }
-          )
         if (!this.waitingSounds[targetId]) {
             return;
         }
@@ -253,25 +239,10 @@ class Scratch3SoundBlocks {
     }
 
     _stopAllSoundsForTarget (target) {
-        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
         if (target.sprite.soundBank) {
             target.sprite.soundBank.stopAllSounds(target);
             if (this.waitingSounds[target.id]) {
-                console.log('種類：音：すべての音を止める');
-                db.transaction(function (transact) {
-                    transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','sound','すべての音を止める'],
-                      );
-                  }
-                      )
-                      console.log("tomeru");
                 this.waitingSounds[target.id].clear();
-            }else{
-                console.log('種類：音：すべての音を止める');
-                db.transaction(function (transact) {
-                    transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','sound','すべての音を止める'],
-                      );
-                  }
-                      )
             }
         }
     }
@@ -288,24 +259,10 @@ class Scratch3SoundBlocks {
     }
 
     setEffect (args, util) {
-        console.log('種類：音：'+args+'の効果を'+util+'にする');
-        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db.transaction(function (transact) {
-        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','sound',args+'の効果を'+util+'にする'],
-          );
-      }
-          )
         return this._updateEffect(args, util, false);
     }
 
     changeEffect (args, util) {
-        console.log('種類：音：'+args+'の効果を'+util+'ずつ変える');
-        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db.transaction(function (transact) {
-        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','sound',args+'の効果を'+util+'ずつ変える'],
-          );
-      }
-          )
         return this._updateEffect(args, util, true);
     }
 
@@ -338,13 +295,6 @@ class Scratch3SoundBlocks {
     }
 
     clearEffects (args, util) {
-        console.log('種類：音：音の効果をなくす');
-        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db.transaction(function (transact) {
-        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','sound','音の効果をなくす'],
-          );
-      }
-          )
         this._clearEffectsForTarget(util.target);
     }
 
@@ -367,25 +317,11 @@ class Scratch3SoundBlocks {
 
     setVolume (args, util) {
         const volume = Cast.toNumber(args.VOLUME);
-        console.log('種類：音：音量を'+args.VOLUME+'%にする');
-        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db.transaction(function (transact) {
-        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','sound','音量を'+args.VOLUME+'%にする'],
-          );
-      }
-          )
         return this._updateVolume(volume, util);
     }
 
     changeVolume (args, util) {
         const volume = Cast.toNumber(args.VOLUME) + util.target.volume;
-        console.log('種類：音：音量を'+args.VOLUME+'ずつ変える');
-        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db.transaction(function (transact) {
-        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['hat_block','sound','音量を'+args.VOLUME+'ずつ変える'],
-          );
-      }
-          )
         return this._updateVolume(volume, util);
     }
 
@@ -399,13 +335,6 @@ class Scratch3SoundBlocks {
     }
 
     getVolume (args, util) {
-        console.log('種類：音：音量');
-        var db = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db.transaction(function (transact) {
-        transact.executeSql("INSERT INTO graduation_research VALUES ( ?, ?, ? )", ['value_block','sound','音量'],
-          );
-      }
-          )
         return util.target.volume;
     }
 
