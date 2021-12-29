@@ -156,49 +156,49 @@ class Blocks {
         //let nextBlockId = thread.target.blocks.getNextBlock(popped);
         const block = this._blocks[id];
         //console.log(block.opcode);
-         //日付オブジェクトを作成する
- var dd = new Date();
- //「年」を取得する
- var yy = dd.getFullYear();
- //「月」を所得する
- var month = dd.getMonth();
- //「日」を取得する
- var day = dd.getDate();
- //「時」を取得する
- var hh = dd.getHours();
- //「分」を取得する
- var mm = dd.getMinutes();
- //「秒」を取得する
- var ss = dd.getSeconds();
- if (yy < 10) {
-     yy = "0" + yy;
-     }
- if (month < 10) {
-     month = "0" + month;
-     }
- if (day < 10) {
-     day = "0" + day;
-     }
- if (hh < 10) {
-     hh = "0" + hh;
-     }
- if (mm < 10) {
-     mm = "0" + mm;
-     }
- if (ss < 10) {
-     ss = "0" + ss;
-     }
-     const times = yy+'-'+month+'-'+day+' '+hh+':'+mm+':'+ss;
-        var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
-        db3.transaction(
-            function (transact3) {
-                if(id.includes('my variable') !== true){
-                    numup();
-                    console.log(block);
-                transact3.executeSql("INSERT INTO Running_Table VALUES ( ?,?, ?,?,?,? )", [num,block.opcode,block.parent,block.id,block.next,times],
-                );
-                };
+        //日付オブジェクトを作成する
+        var dd = new Date();
+         //「年」を取得する
+         var yy = dd.getFullYear();
+         //「月」を所得する
+         var month = dd.getMonth();
+         //「日」を取得する
+         var day = dd.getDate();
+         //「時」を取得する
+         var hh = dd.getHours();
+         //「分」を取得する
+         var mm = dd.getMinutes();
+         //「秒」を取得する
+         var ss = dd.getSeconds();
+         if (yy < 10) {
+             yy = "0" + yy;
             }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (hh < 10) {
+                hh = "0" + hh;
+            }
+            if (mm < 10) {
+                mm = "0" + mm;
+            }
+            if (ss < 10) {
+                ss = "0" + ss;
+            }
+            const times = yy+'-'+month+'-'+day+' '+hh+':'+mm+':'+ss;
+            var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
+            db3.transaction(
+                function (transact3) {
+                    if(id.includes('my variable') !== true){
+                        numup();
+                        console.log(block);
+                        transact3.executeSql("INSERT INTO Running_Table VALUES ( ?,?, ?,?,?,? )", [num,block.opcode,block.parent,block.id,block.next,times],
+                        );
+                    };
+                }
             )
         return (typeof block === 'undefined') ? null : block.next;
     }
@@ -683,6 +683,7 @@ class Blocks {
                     function (transact3) {
                         if(block.parent==null){
                             numup4();
+                            //編集中に作成した時の情報
                             transact3.executeSql("INSERT INTO Editing_Table VALUES ( ?,?,?,?,?,?,?,? )", [num4,block.opcode,block.id,block.parent,null,null,timesnm2,'create'],
                         );
                         }
@@ -1044,6 +1045,7 @@ class Blocks {
                     function (transact3) {
                         if(block.parent==null){
                             numup4();
+                            //編集中に消した時の情報
                             transact3.executeSql("INSERT INTO Editing_Table VALUES ( ?,?,?,?,?,?,?,? )", [num4,block.opcode,block.id,block.parent,null,null,timesnm2,'delete'],
                         );
                         }
