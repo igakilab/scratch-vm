@@ -2662,9 +2662,9 @@ class Runtime extends EventEmitter {
         db3.transaction(function (transact3) {
             transact3.executeSql("CREATE TABLE Running_Table (num,opcode,parent,id,next,time)", [],
               );
-            transact3.executeSql("CREATE TABLE Unnecessary_Table (num,Id,workspaceId)", [],
+            transact3.executeSql("CREATE TABLE Unnecessary_Table (num,Id,groupId)", [],
             );
-            transact3.executeSql("CREATE TABLE Editing_Table (num,opcode,Id,parent,oldparent,workspaceId,time,type)", [],
+            transact3.executeSql("CREATE TABLE Editing_Table (num,opcode,Id,parent,oldparent,groupId,time,type)", [],
             );
             }
             );
@@ -2674,7 +2674,7 @@ class Runtime extends EventEmitter {
         var db3 = window.openDatabase(dbname, dbversion, dbdescription, dbsize);
         db3.transaction(
             function (transact) {
-             transact.executeSql('UPDATE Editing_Table AS move2 SET workspaceId = (SELECT workspaceId FROM Unnecessary_Table WHERE Id =move2.Id)',
+             transact.executeSql('UPDATE Editing_Table AS move2 SET groupId = (SELECT groupId FROM Unnecessary_Table WHERE Id =move2.Id)',
              [],
              );
              transact.executeSql('DELETE FROM Running_Table WHERE num NOT IN ( SELECT num FROM( SELECT * FROM Running_Table as t1 WHERE 1 = (SELECT COUNT(*) FROM Running_Table as t2 WHERE t1.id = t2.id AND t1.time = t2.time AND t1.num <= t2.num)) AS tmp)',

@@ -392,6 +392,7 @@ class Blocks {
             for (let i = 0; i < newBlocks.length; i++) {
                 this.createBlock(newBlocks[i]);
             }
+
             //起動時の名称登録の除外
             if(e.blockId.includes('yposition') !== true&&e.blockId.includes('direction') !== true&&e.blockId.includes('switchcostumeto') !== true&&e.blockId.includes('costumenumbername') !== true&&e.blockId.includes('size') !== true&&e.blockId.includes('sound_playuntildone') !== true&&e.blockId.includes('sound_play') !== true&&e.blockId.includes('volume') !== true&&e.blockId.includes('my variable') !== true){
             if(e.blockId.includes('xposition') !== true&&e.blockId!=='pen'&&e.blockId!=='procedures'&&e.blockId!=='music'&&e.blockId!=='yposition'&&e.blockId!=='direction'&&e.blockId!='event_whenflagclicked'&&e.blockId!='event_whengreaterthan'&&e.blockId!='event_whenkeypressed'&&e.blockId!='operator_gt'&&e.blockId!='operator_join'&&e.blockId!='operator_length'&&e.blockId!='operator_letter_of'&&e.blockId!='operator_lt'&&e.blockId!='operator_mathop'&&e.blockId!='motion_pointtowards'&&e.blockId!='sensing_setdragmode'&&e.blockId!='sensing_touchingcolor'&&e.blockId!='sensing_touchingobject'&&e.blockId!='sensing_mousedown'&&e.blockId!='sensing_mousex'&&e.blockId!='sensing_mousey'&&e.blockId!='sensing_resettimer'&&e.blockId!='control_start_as_clone'&&e.blockId!='control_stop'&&e.blockId!='control_wait'&&e.blockId!='current'&&e.blockId!='data_changevariableby'&&e.blockId!='data_setvariableto'&&e.blockId!='data_showvariable'&&e.blockId!='event_broadcast'&&e.blockId!='operator_or'&&e.blockId!='operator_random'&&e.blockId!='operator_round'&&e.blockId!='operator_mod'&&e.blockId!='operator_multiply'&&e.blockId!='operator_not'&&e.blockId!='motion_pointindirection'&&e.blockId!='event_whenstageclicked'&&e.blockId!='event_whenthisspriteclicked'&&e.blockId!='forever'&&e.blockId!='looks_changeeffectby'&&e.blockId!='looks_changesizeby'&&e.blockId!='looks_cleargraphiceffects'&&e.blockId!='sensing_username'&&e.blockId!='sound_changeeffectby'&&e.blockId!='sound_changevolumeby'&&e.blockId!='sound_cleareffects'&&e.blockId!='sound_seteffectto'&&e.blockId!='sound_setvolumeto'&&e.blockId!='motion_setrotationstyle'){
@@ -400,7 +401,8 @@ class Blocks {
                 db3.transaction(
                     function (transact3) {
                         numup3();
-                        transact3.executeSql("INSERT INTO Unnecessary_TABLE VALUES ( ?,?,?)", [num3,e.blockId,e.workspaceId],
+                        console.log(e);
+                        transact3.executeSql("INSERT INTO Unnecessary_TABLE VALUES ( ?,?,?)", [num3,e.blockId,e.group],
                         );
                     }
                     );
@@ -895,6 +897,7 @@ class Blocks {
                 db3.transaction(
                     function (transact3) {
                         numup4();
+                        //編集中に移動した時の情報
                         if(e.oldParent==undefined){
                             transact3.executeSql("INSERT INTO Editing_Table VALUES ( ?,?,?,?,?,?,?,? )", [num4,block.opcode,block.id,block.parent,null,null,timesnm2,'move'],
                         );
