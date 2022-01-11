@@ -401,7 +401,6 @@ class Blocks {
                 db3.transaction(
                     function (transact3) {
                         numup3();
-                        console.log(e);
                         transact3.executeSql("INSERT INTO Unnecessary_TABLE VALUES ( ?,?,?)", [num3,e.blockId,e.group],
                         );
                     }
