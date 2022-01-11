@@ -194,7 +194,6 @@ class Blocks {
                 function (transact3) {
                     if(id.includes('my variable') !== true){
                         numup();
-                        console.log(block);
                         transact3.executeSql("INSERT INTO Running_Table VALUES ( ?,?, ?,?,?,? )", [num,block.opcode,block.parent,block.id,block.next,times],
                         );
                     };
@@ -401,7 +400,6 @@ class Blocks {
                 db3.transaction(
                     function (transact3) {
                         numup3();
-                        console.log(e);
                         transact3.executeSql("INSERT INTO Unnecessary_TABLE VALUES ( ?,?,?)", [num3,e.blockId,e.workspaceId],
                         );
                     }
