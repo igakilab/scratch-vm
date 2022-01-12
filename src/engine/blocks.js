@@ -161,7 +161,7 @@ class Blocks {
          //「年」を取得する
          var yy = dd.getFullYear();
          //「月」を所得する
-         var month = dd.getMonth();
+         var month = dd.getMonth()+1;
          //「日」を取得する
          var day = dd.getDate();
          //「時」を取得する
@@ -643,7 +643,7 @@ class Blocks {
         //「年」を取得する
         var yy = dd2.getFullYear();
         //「月」を所得する
-        var month = dd2.getMonth();
+        var month = dd2.getMonth()+1;
         //「日」を取得する
         var day = dd2.getDate();
         //「時」を取得する
@@ -858,7 +858,7 @@ class Blocks {
         //「年」を取得する
         var yy = dd2.getFullYear();
         //「月」を所得する
-        var month = dd2.getMonth();
+        var month = dd2.getMonth()+1;
         //「日」を取得する
         var day = dd2.getDate();
         //「時」を取得する
@@ -1006,7 +1006,7 @@ class Blocks {
         //「年」を取得する
         var yy = dd2.getFullYear();
         //「月」を所得する
-        var month = dd2.getMonth();
+        var month = dd2.getMonth()+1;
         //「日」を取得する
         var day = dd2.getDate();
         //「時」を取得する
